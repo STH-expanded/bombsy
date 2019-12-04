@@ -11,6 +11,8 @@ class Bomb {
         return '';
     }
     explode(left, right, up, down) {
+        const tileRange = 1 + this.player.range;
+        const position = this.position;
         return '';
     }
 }

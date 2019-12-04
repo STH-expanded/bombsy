@@ -4,9 +4,9 @@ class Bomb {
     private range: number;
     private state: string;
     private player: Player;
-    private position: [];
+    private position: Vector2D;
 
-    constructor(name: string, timeRemaining: number, range: number, state: string, player: Player, position: []) {
+    constructor(name: string, timeRemaining: number, range: number, state: string, player: Player, position: Vector2D) {
         this.name = name;
         this.timeRemaining = timeRemaining;
         this.range = range;
@@ -15,11 +15,14 @@ class Bomb {
         this.position = position;
     }
 
-    countdown(seconds: number) {
+    public countdown(seconds: number) {
         return '';
     }
 
     public explode(left: number, right: number, up: number, down: number) {
+        const tileRange: number = 1 + this.player.range;
+        const position: Vector2D = this.position;
+
         return '';
     }
 }
