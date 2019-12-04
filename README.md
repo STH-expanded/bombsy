@@ -8,4 +8,4 @@ A Bomberman-like game
 - [Mathis L.](https://github.com/MathisLeRoyNivot "Go to @MathisLeRoyNivot's Github")
 
 ## License :white_check_mark:
-[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/STH-expanded/bombsy/blob/master/LICENSE) ***STH Exanpanded 2019*** ©
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/STH-expanded/bombsy/blob/master/LICENSE) ***STH Expanded 2019*** ©
