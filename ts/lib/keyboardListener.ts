@@ -1,4 +1,12 @@
 class KeyboardListener {
+    
+    // Properties
+    keys;
+    keyCodes;
+
+    // Methods
+    listen: any;
+
     constructor() {
         this.keys = null;
 

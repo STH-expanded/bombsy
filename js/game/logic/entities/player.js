@@ -2,6 +2,7 @@ class Player {
     constructor(speed, pos, bombCount, canPush) {
         this.speed = speed;
         this.position = pos;
+        this.size = [10, 10];
         this.isAlive = true;
         this.bombCount = bombCount;
         this.bombCapacity = 1;

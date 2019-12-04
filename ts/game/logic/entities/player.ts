@@ -5,6 +5,7 @@ class Player {
     skin: string;
     speed: number;
     position: Array<number>;
+    size: Array<number>
     isAlive: boolean;
     bombCount: number;
     bombCapacity: number;
@@ -21,6 +22,7 @@ class Player {
     constructor(speed: number, pos: Array<number>, bombCount: number, canPush: boolean) {
         this.speed = speed;
         this.position = pos;
+        this.size = [10,10];
         this.isAlive = true;
         this.bombCount = bombCount;
         this.bombCapacity = 1;

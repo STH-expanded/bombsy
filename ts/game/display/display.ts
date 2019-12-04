@@ -35,8 +35,8 @@ class Display {
             var player = this.game.player;
             this.cx.fillStyle = "#fff";
             this.cx.fillRect(
-                player.pos.x * this.zoom,
-                player.pos.y * this.zoom,
+                player.position.x * this.zoom,
+                player.position.y * this.zoom,
                 player.size.x * this.zoom,
                 player.size.y * this.zoom
             );
@@ -44,7 +44,7 @@ class Display {
             this.cx.fillStyle = "#fff";
             this.cx.font = 16 * this.zoom + "px consolas";
             this.cx.fillText(
-                "x:" + player.pos.x + " y:" + player.pos.y,
+                "x:" + player.position.x + " y:" + player.position.y,
                 8 * this.zoom,
                 16 * this.zoom
             );

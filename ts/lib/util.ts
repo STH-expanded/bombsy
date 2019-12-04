@@ -1,5 +1,14 @@
 class Vector2D {
-    constructor(x, y) {
+
+    // Properties
+    x: number;
+    y: number;
+
+    // Methods
+    plus: any;
+    times: any;
+
+    constructor(x: number, y: number) {
         this.x = x;
         this.y = y;
         this.plus = other => new Vector2D(this.x + other.x, this.y + other.y);

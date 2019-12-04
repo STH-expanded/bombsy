@@ -3,7 +3,7 @@ class Game {
     // Properties
     frame: number;
     keys: any;
-    lastKeys: Map<>; // need to be changed
+    lastKeys; // need to be changed
     player: Player;
 
     // Methods
