@@ -25,7 +25,6 @@ window.onload = () => {
     var display = new Display(game);
 
     var keyboardListener = new KeyboardListener();
-    keyboardListener.listen();
 
     window.game = game;
 
