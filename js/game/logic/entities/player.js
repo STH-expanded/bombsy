@@ -1,6 +1,7 @@
 class Player {
 
     constructor(pos) {
+        this.name = "Polo";
         this.walkspeed = 5;
         this.speed = new Vector2D(1, 0);
         this.pos = pos;
@@ -57,7 +58,6 @@ class Player {
             // );
 
             // Directions
-
             if (game.keys.up && !game.keys.down) {
                 this.speed.y = -this.walkspeed;
             } else if (game.keys.down && !game.keys.up) {
@@ -79,8 +79,14 @@ class Player {
             this.pos = newPos;
         }
 
-        this.dropBomb = () => {
+        this.dropBomb = game => {
+            if (game.keys.a) {
+                let bomb = new Bomb(1, this.name, this.pos);
+                game.bombs.push(bomb);
+            } else {
+            }
 
+            
         }
 
         this.pushBomb = () => {
@@ -90,8 +96,9 @@ class Player {
         this.update = game => {
             this.moveX(game);
             this.moveY(game);
-            this.dropBomb();
+            this.dropBomb(game);
             this.pushBomb();
         }
+
     }
 }

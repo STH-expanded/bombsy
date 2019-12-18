@@ -12,6 +12,8 @@ class Game {
         // ]);
         this.player = new Player(new Vector2D(10, 10));
 
+        this.bombs = [];
+
         this.menuOptionList = ["Start game", "About"];
         this.endMenuOptionList = ["Play again", "Quit game"];
 
@@ -38,7 +40,16 @@ class Game {
         this.update = keys => {
             this.keys = keys;
 
+            // console.log(this.bombs);
+
             this.player.update(this);
+
+            this.bombs.forEach((bomb, index) => {
+                bomb.update();
+                if (bomb.state == 'exploded') {
+                    this.bombs.splice(index, 1);
+                }
+            });
 
             // console.log('x: '+this.player.pos.x+', y: '+this.player.pos.y);s
 

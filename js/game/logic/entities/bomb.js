@@ -1,30 +1,31 @@
 class Bomb {
 
-    constructor(name, timeRemaining, range, state, player, position) {
-        this.name = name;
-        this.timeRemaining = 3; // 3 seconds delay
+    constructor(range, player, position) {
+        this.timeRemaining = 180; // 3 seconds delay
         this.range = range;
-        this.state = state;
+        this.state = "lol";
         this.player = player;
         this.position = position;
     }
 
     countdown = () => {
-        let interval = setInterval(() => {
-            this.timeRemaining--;
-
-            if (this.timeRemaining < 0) {
-                clearInterval(interval);
-            }
-        }, 1000);
-
-        return this.explode(this.position.x, this.position.y);
+        
     }
 
-    explode = (x, y) => {
-        const tileRange = 1 + this.player.range;
-        const position = this.position;
+    explode = () => {
+        // const tileRange = 1 + this.player.range;
+        // const position = this.position;
 
+        this.state = "exploded";
         return '';
+    }
+
+    update = () => {
+        if (this.timeRemaining > 0) {
+            this.timeRemaining--;
+        } else {
+            this.explode()
+        }
+        
     }
 }

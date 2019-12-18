@@ -93,7 +93,7 @@ class Display {
         this.frame++; */
 
         var classicLevel = new Level(firstLevel, "./plant.jpeg","./stroke.png","./brick.png");
-        console.log(classicLevel.tiles);
+        // console.log(classicLevel.tiles);
         classicLevel.fillMap(this);
     };
 
