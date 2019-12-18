@@ -4,6 +4,8 @@ window.onload = () => {
     var game = new Game(inputManager.inputList);
     var display = new Display(game);
 
+    // window.game = game;
+
     var frame = () => {
         inputManager.update();
         game.update();

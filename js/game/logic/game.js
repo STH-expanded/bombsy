@@ -9,7 +9,7 @@ class Game {
 
         this.players = [];
 
-        this.player = new Player(1, [], 1, false);
+        this.player = new Player(new Vector2D(10, 10));
 
         this.menuOptionList = ["Start game", "About"];
         this.endMenuOptionList = ["Play again", "Quit game"];
@@ -30,8 +30,6 @@ class Game {
         this.gameState = this.gameStateEnum.MAINMENU;
         window.gameState = this.gameState;
         this.gamemode = null;
-
-        console.log(this.player);
 
         this.updateMainMenu = () => {
             /*console.log(this.keys);
