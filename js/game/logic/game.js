@@ -18,7 +18,8 @@ class Game {
             MAINMENU: "mainMenu",
             GAMESETTINGS: "gameSettings",
             FIGHT: "fight",
-            ENDMENU: "endMenu"
+            ENDMENU: "endMenu",
+            ABOUT: "about"
         };
 
         this.gameMap = {
@@ -32,14 +33,16 @@ class Game {
         this.gamemode = null;
 
         this.updateMainMenu = () => {
-            /*console.log(this.keys);
             var nbMenu = this.menuOptionList.length;
-            if (this.keys.get('arrow-up')) {
+            if (game.keys.up && !game.keys.down) {
                 console.log('up');
+
+                //this.gameState = this.gameStateEnum.GAMESETTINGS;
             }
-            if (this.keys.get('arrow-down')) {
+            if (game.keys.down && !game.keys.up) {
                 console.log('down');
-            }*/
+                //this.gameState = this.gameStateEnum.ABOUT;
+            }
         };
 
         this.updateEndMenu = () => {};

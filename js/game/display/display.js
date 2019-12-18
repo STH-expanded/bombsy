@@ -3,7 +3,7 @@ class Display {
     update = () => {
         switch (this.game.gameState) {
             case this.game.gameStateEnum.MAINMENU:
-                this.displayMainMenu();
+                this.displayMainMenu(this.game.gameState);
                 break;
             case this.game.gameStateEnum.CHARACTERSELECTION:
                 this.displayGameSettings();
@@ -18,83 +18,6 @@ class Display {
                 break;
         }
         this.frame++;
-
-        //background
-        /*
-        this.cx.fillStyle = "#FE3455";
-        this.cx.fillRect(
-            0 * this.zoom,
-            0 * this.zoom,
-            this.canvas.width * this.zoom,
-            this.canvas.height * this.zoom
-        );
-
-        //obstacles
-        this.cx.fillStyle = "#000";
-        this.game.obstacles.forEach(obstacle => {
-            this.cx.fillRect(
-                obstacle.pos.x * this.zoom,
-                obstacle.pos.y * this.zoom,
-                obstacle.size.x * this.zoom,
-                obstacle.size.y * this.zoom
-            );
-        });
-
-        */
-        //player
-        // var player = this.game.player;
-        // this.cx.fillStyle = "#FFFFFF";
-        // this.cx.fillRect(
-        //     player.pos.x * this.zoom,
-        //     player.pos.y * this.zoom,
-        //     player.size.x * this.zoom,
-        //     player.size.y * this.zoom
-        // );
-        /*
-
-        var player = this.game.player;
-        // var sprite = player.speed.x ? this.playerSprite2 : this.playerSprite;
-
-        var sprite = this.playerSprite;
-
-        // Player 1 image :
-        this.cx.drawImage(
-            sprite,
-            0,
-            0,
-            117,
-            83,
-            player.pos.x * this.zoom,
-            player.pos.y * this.zoom,
-            player.size.x * this.zoom,
-            player.size.y * this.zoom
-        );
-
-        console.log("player 1:");
-        console.log(this.game.player.pos);
-        console.log("player 2 :");
-        console.log(this.game.player2.pos);
-
-        //interface
-        this.cx.fillStyle = "#fff";
-        this.cx.font = 16 * this.zoom + "px consolas";
-        this.cx.fillText(
-            "x:" + player.pos.x + " y:" + player.pos.y,
-            8 * this.zoom,
-            16 * this.zoom
-        );
-
-        this.cx.fillText(
-            "x:" + player2.pos.x + " y:" + player2.pos.y,
-            392 * this.zoom,
-            16 * this.zoom
-        );
-
-        this.frame++; */
-
-        var classicLevel = new Level(firstLevel, "./plant.jpeg","./stroke.png","./brick.png");
-        console.log(classicLevel.tiles);
-        classicLevel.fillMap(this);
     };
 
     resize = () => {
@@ -122,7 +45,7 @@ class Display {
         this.cx.imageSmoothingEnabled = false;
     };
 
-    displayMainMenu = () => {
+    displayMainMenu = (gameState) => {
         this.cx.fillStyle = "green";
         this.cx.fillRect(
             0 * this.zoom,
@@ -132,17 +55,23 @@ class Display {
         );
 
         this.game.menuOptionList.forEach((option, index) => {
-            if (this.game.menuOptionList[this.game.mainMenuCursor] === option) {
-                this.cx.fillStyle = "red";
-            } else {
+            if (option === "Start game") {
+                this.cx.fillStyle = "white";
+                this.cx.font = `${20 * this.zoom}px serif`;
+                this.cx.fillText(
+                    option,
+                    (400 * this.zoom) / 2,
+                    (270 * this.zoom) / 2 + 20 * index
+                );
+            } else if (option === "About") {
                 this.cx.fillStyle = "black";
+                this.cx.font = `${20 * this.zoom}px serif`;
+                this.cx.fillText(
+                    option,
+                    (400 * this.zoom) / 2,
+                    (270 * this.zoom) / 2 + 40 * index
+                );
             }
-            this.cx.font = "16px serif";
-            this.cx.fillText(
-                option,
-                (450 * this.zoom) / 2,
-                (270 * this.zoom) / 2 + 20 * index
-            );
         });
     };
 
