@@ -43,10 +43,10 @@ class Game {
             // console.log('x: '+this.player.pos.x+', y: '+this.player.pos.y);s
 
             this.lastKeys = new Map([
-                ["left", keys.get("left")],
-                ["up", keys.get("up")],
-                ["right", keys.get("right")],
-                ["down", keys.get("down")]
+                ["left", keys.left],
+                ["up", keys.up],
+                ["right", keys.right],
+                ["down", keys.down]
             ]);
 
             switch (this.gameState) {

@@ -91,6 +91,10 @@ class Display {
         );
 
         this.frame++; */
+
+        var classicLevel = new Level(firstLevel, "./plant.jpeg","./stroke.png","./brick.png");
+        console.log(classicLevel.tiles);
+        classicLevel.fillMap(this);
     };
 
     resize = () => {
@@ -220,9 +224,6 @@ class Display {
     constructor(game) {
         this.frame = 0;
         this.zoom = 1;
-
-        this.playerSprite = document.createElement("img");
-        this.playerSprite.src = "./charizard.png";
 
         this.game = game;
 

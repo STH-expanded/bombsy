@@ -13,9 +13,9 @@ class Player {
 
         this.moveX = game => {
             // Directions
-            if (game.keys.get('left')) {
+            if (game.keys.left) {
                 this.speed.x = -this.walkspeed;
-            } else if (game.keys.get('right')) {
+            } else if (game.keys.right) {
                 this.speed.x = this.walkspeed;
             } else {
                 this.speed.x = 0;
@@ -61,9 +61,9 @@ class Player {
             //     this.speed.y = -this.jumpSpeed;
             // }
 
-            if (game.keys.get('up')) {
+            if (game.keys.up) {
                 this.speed.y = -this.walkspeed;
-            } else if (game.keys.get('down')) {
+            } else if (game.keys.down) {
                 this.speed.y = this.walkspeed;
             } else {
                 this.speed.y = 0;
