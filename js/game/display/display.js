@@ -93,9 +93,21 @@ class Display {
         this.frame++; */
 
         var classicLevel = new Level(firstLevel, "./plant.jpeg","./stroke.png","./brick.png");
-        console.log(classicLevel.tiles);
         classicLevel.fillMap(this);
+        console.log(classicLevel.tiles.size);
+        console.log(classicLevel.tiles);
+        for (let z = 0; z < classicLevel.tiles.size; z++) {
+            var x = 0;
+            var y = 0;
+            let tile = classicLevel.tiles.get(x + ", " + y);
+                //console.log(tile);
     };
+
+    for (var row = 0; row < tilese; row++) {
+        for (var column = 0; column < this.map[0].length; column++) {
+            }
+        }
+    }
 
     resize = () => {
         if (innerWidth >= 1920 && innerHeight >= 1080) {
