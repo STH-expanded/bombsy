@@ -13,9 +13,9 @@ class Player {
 
         this.moveX = game => {
             // Directions
-            if (game.keys.left) {
+            if (game.keys.left && !game.keys.right) {
                 this.speed.x = -this.walkspeed;
-            } else if (game.keys.right) {
+            } else if (game.keys.right && !game.keys.left) {
                 this.speed.x = this.walkspeed;
             } else {
                 this.speed.x = 0;
@@ -55,15 +55,12 @@ class Player {
             //     new Vector2D(1, 1), 
             //     game.floor.size
             // );
-    
-            // Directions
-            // if (floor && game.keys.get('up')) {
-            //     this.speed.y = -this.jumpSpeed;
-            // }
 
-            if (game.keys.up) {
+            // Directions
+
+            if (game.keys.up && !game.keys.down) {
                 this.speed.y = -this.walkspeed;
-            } else if (game.keys.down) {
+            } else if (game.keys.down && !game.keys.up) {
                 this.speed.y = this.walkspeed;
             } else {
                 this.speed.y = 0;
