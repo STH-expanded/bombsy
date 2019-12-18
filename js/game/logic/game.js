@@ -4,13 +4,13 @@ class Game {
         this.frame = 0;
 
         this.keys = null;
-        this.lastKeys = new Map([
-            ["left", null],
-            ["up", null],
-            ["right", null],
-            ["down", null]
-        ]);
-        this.player = new Player(1, [], 1, false);
+        // this.lastKeys = new Map([
+        //     ["left", null],
+        //     ["up", null],
+        //     ["right", null],
+        //     ["down", null]
+        // ]);
+        this.player = new Player(new Vector2D(10, 10));
 
         this.menuOptionList = ["Start game", "About"];
         this.endMenuOptionList = ["Play again", "Quit game"];
@@ -24,8 +24,6 @@ class Game {
 
         this.gameState = this.gameStateEnum.MAINMENU;
         this.gamemode = null;
-
-        console.log(this.player);
 
         this.updateMainMenu = () => {
             var nbMenu = this.menuOptionList.length;
@@ -41,6 +39,8 @@ class Game {
             this.keys = keys;
 
             this.player.update(this);
+
+            // console.log('x: '+this.player.pos.x+', y: '+this.player.pos.y);s
 
             this.lastKeys = new Map([
                 ["left", keys.get("left")],

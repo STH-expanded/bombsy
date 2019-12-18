@@ -6,6 +6,8 @@ window.onload = () => {
     var keyboardListener = new KeyboardListener();
     keyboardListener.listen();
 
+    window.game = game;
+
     var frame = () => {
         game.update(keyboardListener.keys);
         display.update();

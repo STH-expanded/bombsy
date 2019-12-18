@@ -20,7 +20,8 @@ class Display {
         this.frame++;
 
         //background
-        /*this.cx.fillStyle = "#FE3455";
+        /*
+        this.cx.fillStyle = "#FE3455";
         this.cx.fillRect(
             0 * this.zoom,
             0 * this.zoom,
@@ -39,14 +40,17 @@ class Display {
             );
         });
 
+        */
         //player
-        var player2 = this.game.player2;
-        this.cx.fillRect(
-            player2.pos.x * this.zoom,
-            player2.pos.y * this.zoom,
-            player2.size.x * this.zoom,
-            player2.size.y * this.zoom
-        );
+        // var player = this.game.player;
+        // this.cx.fillStyle = "#FFFFFF";
+        // this.cx.fillRect(
+        //     player.pos.x * this.zoom,
+        //     player.pos.y * this.zoom,
+        //     player.size.x * this.zoom,
+        //     player.size.y * this.zoom
+        // );
+        /*
 
         var player = this.game.player;
         // var sprite = player.speed.x ? this.playerSprite2 : this.playerSprite;
@@ -168,8 +172,8 @@ class Display {
             270 * this.zoom
         );
 
-        var player1 = this.game.fight.player1.character;
-        var player2 = this.game.fight.player2.character;
+        var player1 = this.game.player;
+        // var player2 = this.game.fight.player2.character;
 
         this.cx.fillStyle = "blue";
         this.cx.fillRect(
@@ -178,13 +182,13 @@ class Display {
             player1.size.x * this.zoom,
             player1.size.y * this.zoom
         );
-        this.cx.fillStyle = "green";
-        this.cx.fillRect(
-            player2.pos.x * this.zoom,
-            player2.pos.y * this.zoom,
-            player2.size.x * this.zoom,
-            player2.size.y * this.zoom
-        );
+        // this.cx.fillStyle = "green";
+        // this.cx.fillRect(
+        //     player2.pos.x * this.zoom,
+        //     player2.pos.y * this.zoom,
+        //     player2.size.x * this.zoom,
+        //     player2.size.y * this.zoom
+        // );
     };
 
     displayEndMenu = () => {
