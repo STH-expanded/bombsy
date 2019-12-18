@@ -1,5 +1,4 @@
 class Bomb {
-
     constructor(name, timeRemaining, range, state, player, position) {
         this.name = name;
         this.timeRemaining = timeRemaining;
@@ -8,15 +7,13 @@ class Bomb {
         this.player = player;
         this.position = position;
     }
-
-    countdown = (seconds) => {
+    countdown(seconds) {
         return '';
     }
-
-    explode = (left, right, up, down) => {
+    explode(left, right, up, down) {
         const tileRange = 1 + this.player.range;
         const position = this.position;
-
         return '';
     }
 }
+//# sourceMappingURL=bomb.js.map

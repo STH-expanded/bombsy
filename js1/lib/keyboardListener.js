@@ -1,15 +1,6 @@
 class KeyboardListener {
-    
-    // Properties
-    keys;
-    keyCodes;
-
-    // Methods
-    listen: any;
-
     constructor() {
         this.keys = null;
-
         this.keyCodes = new Map([
             [81, "left"],
             [90, "up"],
@@ -19,9 +10,7 @@ class KeyboardListener {
             [37, "arrow-left"],
             [40, "arrow-down"],
             [38, "arrow-up"],
-
         ]);
-
         this.listen = () => {
             var pressed = new Map();
             this.keyCodes.forEach(code => pressed.set(code, false));
@@ -38,3 +27,4 @@ class KeyboardListener {
         };
     }
 }
+//# sourceMappingURL=keyboardListener.js.map
