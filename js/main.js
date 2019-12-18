@@ -1,8 +1,11 @@
 window.onload = () => {
+
     var game = new Game();
     var display = new Display(game);
+
     var keyboardListener = new KeyboardListener();
     keyboardListener.listen();
+
     var frame = () => {
         game.update(keyboardListener.keys);
         display.update();
@@ -10,4 +13,3 @@ window.onload = () => {
     };
     requestAnimationFrame(frame);
 };
-//# sourceMappingURL=main.js.map
