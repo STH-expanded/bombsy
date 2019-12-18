@@ -51,46 +51,36 @@ class Game {
         this.update = keys => {
             this.keys = keys;
 
-            // console.log(keys);
             this.player.update(this);
 
             if (!this.gamemode) {
 
-            } else if (!this.fight) {
+                this.lastKeys = new Map([
+                    ["left", keys.left],
+                    ["up", keys.up],
+                    ["right", keys.right],
+                    ["down", keys.down]
+                ]);
 
-            } else {
+                switch (this.gameState) {
+                    case this.gameStateEnum.MAINMENU:
+                        this.updateMainMenu();
+                        break;
+                    case this.gameStateEnum.GAMESETTINGS:
+                        this.manageGameSettings();
+                        break;
+                    case this.gameStateEnum.FIGHT:
+                        this.manageFight();
+                        break;
+                    case this.gameStateEnum.ENDMENU:
+                        this.updateEndMenu();
+                        break;
+                    default:
+                        break;
+                }
 
-            }
-
-            this.inputList.forEach((input, id) => {
-                if (input.a) console.log("a : " + id);
-                if (input.b) console.log("b : " + id);
-                if (input.up) console.log("up : " + id);
-                if (input.down) console.log("down : " + id);
-                if (input.left) console.log("left : " + id);
-                if (input.right) console.log("right : " + id);
-            });
-
-            this.frame++;
-
-            switch (this.gameState) {
-                case this.gameStateEnum.MAINMENU:
-                    this.updateMainMenu();
-                    break;
-                case this.gameStateEnum.GAMESETTINGS:
-                    this.manageGameSettings();
-                    break;
-                case this.gameStateEnum.FIGHT:
-                    this.manageFight();
-                    break;
-                case this.gameStateEnum.ENDMENU:
-                    this.updateEndMenu();
-                    break;
-                default:
-                    break;
-            }
-
-            this.frame++;
-        };
+                this.frame++;
+            };
+        }
     }
 }
