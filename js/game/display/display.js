@@ -197,9 +197,7 @@ class Display {
         );
 
         this.game.endMenuOptionList.forEach((option, index) => {
-            if (
-                this.game.endMenuOptionList[this.game.endMenuCursor] === option
-            ) {
+            if (this.game.endMenuOptionList[this.game.endMenuCursor] === option) {
                 this.cx.fillStyle = "red";
             } else {
                 this.cx.fillStyle = "black";

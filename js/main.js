@@ -1,15 +1,15 @@
 window.onload = () => {
 
-    var game = new Game();
+    var inputManager = new InputManager();
+    var game = new Game(inputManager.inputList);
     var display = new Display(game);
 
-    var keyboardListener = new KeyboardListener();
-    keyboardListener.listen();
-
     var frame = () => {
-        game.update(keyboardListener.keys);
+        inputManager.update();
+        game.update();
         display.update();
         requestAnimationFrame(frame);
-    };
+    }
+
     requestAnimationFrame(frame);
 };
