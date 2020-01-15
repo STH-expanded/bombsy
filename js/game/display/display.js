@@ -186,13 +186,24 @@ class Display {
     
         // Bombs 
         this.game.bombs.forEach(bomb => {
-            this.cx.fillStyle = "black";
-            this.cx.fillRect(
-                bomb.pos.x * this.zoom,
-                bomb.pos.y * this.zoom,
-                10 * this.zoom,
-                10 * this.zoom
-            );
+            if (bomb.state == "pending") {
+                this.cx.fillStyle = "black";
+                this.cx.fillRect(
+                    bomb.pos.x * this.zoom,
+                    bomb.pos.y * this.zoom,
+                    10 * this.zoom,
+                    10 * this.zoom
+                );
+            } else if (bomb.state == "exploding") {
+                this.cx.fillStyle = "yellow";
+                this.cx.fillRect(
+                    bomb.pos.x * this.zoom,
+                    bomb.pos.y * this.zoom,
+                    10 * this.zoom,
+                    10 * this.zoom
+                );
+            }
+            
         });
     }
 
