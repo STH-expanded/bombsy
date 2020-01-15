@@ -186,21 +186,44 @@ class Display {
     
         // Bombs 
         this.game.bombs.forEach(bomb => {
+            // Bomb Pending
             if (bomb.state == "pending") {
                 this.cx.fillStyle = "black";
                 this.cx.fillRect(
                     bomb.pos.x * this.zoom,
                     bomb.pos.y * this.zoom,
-                    10 * this.zoom,
-                    10 * this.zoom
+                    this.game.tileSize * this.zoom,
+                    this.game.tileSize * this.zoom
                 );
             } else if (bomb.state == "exploding") {
+                // Bomb Exploding
                 this.cx.fillStyle = "yellow";
                 this.cx.fillRect(
                     bomb.pos.x * this.zoom,
                     bomb.pos.y * this.zoom,
-                    10 * this.zoom,
-                    10 * this.zoom
+                    (this.game.tileSize * bomb.range) * this.zoom,
+                    player1.size.y * this.zoom
+                );
+
+                this.cx.fillRect(
+                    bomb.pos.x * this.zoom,
+                    bomb.pos.y * this.zoom,
+                    player1.size.x * this.zoom,
+                    (this.game.tileSize * bomb.range) * this.zoom
+                );
+
+                this.cx.fillRect(
+                    bomb.pos.x * this.zoom,
+                    bomb.pos.y * this.zoom,
+                    (-(this.game.tileSize * bomb.range) + player1.size.x) * this.zoom,
+                    player1.size.y * this.zoom
+                );
+
+                this.cx.fillRect(
+                    bomb.pos.x * this.zoom,
+                    bomb.pos.y * this.zoom,
+                    player1.size.x * this.zoom,
+                    (-(this.game.tileSize * bomb.range) + player1.size.y) * this.zoom
                 );
             }
             

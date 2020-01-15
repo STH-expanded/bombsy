@@ -8,8 +8,8 @@ class Player {
         this.size = new Vector2D(10, 10);
         this.isAlive = true;
         this.bombCount = 0;
-        this.bombCapacity = 1;
-        this.range = 2;
+        this.bombCapacity = 3;
+        this.range = 10;
         this.canPush = false;
 
         // Horizontal Movement
@@ -84,7 +84,7 @@ class Player {
         // Drop Bomb
         this.dropBomb = game => {
             if (game.keys.space && !game.lastKeys.space && this.bombCount < this.bombCapacity) {
-                let bomb = new Bomb(1, this.name, this.pos);
+                let bomb = new Bomb(this.range, this.name, this.pos);
                 game.bombs.push(bomb);
 
                 // Increment Bomb Counter

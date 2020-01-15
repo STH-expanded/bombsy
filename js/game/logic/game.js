@@ -7,6 +7,8 @@ class Game {
         this.lastKey = null;
         this.player = new Player(new Vector2D(10, 10));
 
+        this.tileSize = 10;
+
         this.bombs = [];
 
         this.menuOptionList = ["Start game", "About"];
