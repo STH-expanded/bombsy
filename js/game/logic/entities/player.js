@@ -8,7 +8,7 @@ class Player {
         this.size = new Vector2D(10, 10);
         this.isAlive = true;
         this.bombCount = 0;
-        this.bombCapacity = 1;
+        this.bombCapacity = 2;
         this.range = 2;
         this.canPush = false;
 
@@ -80,13 +80,13 @@ class Player {
         }
 
         this.dropBomb = game => {
-            if (game.keys.a) {
+            if (game.keys.space && !game.lastKeys.space && this.bombCount < this.bombCapacity) {
                 let bomb = new Bomb(1, this.name, this.pos);
                 game.bombs.push(bomb);
-            } else {
-            }
 
-            
+                // Increment Bomb Counter
+                this.bombCount++;
+            }             
         }
 
         this.pushBomb = () => {

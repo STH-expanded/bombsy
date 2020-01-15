@@ -92,7 +92,7 @@ class Display {
 
         this.frame++; */
 
-        var classicLevel = new Level(firstLevel, "./plant.jpeg","./stroke.png","./brick.png");
+        var classicLevel = new Level(firstLevel, "./plant.jpeg", "./stroke.png", "./brick.png");
         // console.log(classicLevel.tiles);
         classicLevel.fillMap(this);
     };
@@ -193,47 +193,61 @@ class Display {
         //     player2.size.x * this.zoom,
         //     player2.size.y * this.zoom
         // );
-    };
 
-    displayEndMenu = () => {
-        this.cx.fillStyle = "yellow";
-        this.cx.fillRect(
-            0 * this.zoom,
-            0 * this.zoom,
-            480 * this.zoom,
-            270 * this.zoom
-        );
+        //Bombs 
+        this.game.bombs.forEach(bomb => {
+            const posX = bomb.pos.x;
+            const posY = bomb.pos.y;
 
-        this.game.endMenuOptionList.forEach((option, index) => {
-            if (
-                this.game.endMenuOptionList[this.game.endMenuCursor] === option
-            ) {
-                this.cx.fillStyle = "red";
-            } else {
-                this.cx.fillStyle = "black";
-            }
-            this.cx.font = "16px serif";
-            this.cx.fillText(
-                option,
-                (450 * this.zoom) / 2,
-                (270 * this.zoom) / 2 + 20 * index
+            this.cx.fillStyle = "black";
+            this.cx.fillRect(
+                posX * this.zoom,
+                posY * this.zoom,
+                10 * this.zoom,
+                10 * this.zoom
             );
         });
-    };
-
-    constructor(game) {
-        this.frame = 0;
-        this.zoom = 1;
-
-        this.game = game;
-
-        this.canvas = document.createElement("canvas");
-        this.cx = this.canvas.getContext("2d");
-
-        this.update();
-
-        this.resize();
-        window.addEventListener("resize", this.resize);
-        document.body.appendChild(this.canvas);
     }
-}
+
+        displayEndMenu = () => {
+            this.cx.fillStyle = "yellow";
+            this.cx.fillRect(
+                0 * this.zoom,
+                0 * this.zoom,
+                480 * this.zoom,
+                270 * this.zoom
+            );
+
+            this.game.endMenuOptionList.forEach((option, index) => {
+                if (
+                    this.game.endMenuOptionList[this.game.endMenuCursor] === option
+                ) {
+                    this.cx.fillStyle = "red";
+                } else {
+                    this.cx.fillStyle = "black";
+                }
+                this.cx.font = "16px serif";
+                this.cx.fillText(
+                    option,
+                    (450 * this.zoom) / 2,
+                    (270 * this.zoom) / 2 + 20 * index
+                );
+            });
+        };
+
+        constructor(game) {
+            this.frame = 0;
+            this.zoom = 1;
+
+            this.game = game;
+
+            this.canvas = document.createElement("canvas");
+            this.cx = this.canvas.getContext("2d");
+
+            this.update();
+
+            this.resize();
+            window.addEventListener("resize", this.resize);
+            document.body.appendChild(this.canvas);
+        }
+    }

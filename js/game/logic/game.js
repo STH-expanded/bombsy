@@ -4,12 +4,7 @@ class Game {
         this.frame = 0;
 
         this.keys = null;
-        // this.lastKeys = new Map([
-        //     ["left", null],
-        //     ["up", null],
-        //     ["right", null],
-        //     ["down", null]
-        // ]);
+        this.lastKey = null;
         this.player = new Player(new Vector2D(10, 10));
 
         this.bombs = [];
@@ -24,7 +19,7 @@ class Game {
             ENDMENU: "endMenu"
         };
 
-        this.gameState = this.gameStateEnum.MAINMENU;
+        this.gameState = this.gameStateEnum.FIGHT;
         this.gamemode = null;
 
         this.updateMainMenu = () => {
@@ -39,6 +34,7 @@ class Game {
 
         this.update = keys => {
             this.keys = keys;
+            // console.log(this.keys);
 
             // console.log(this.bombs);
 
@@ -48,17 +44,21 @@ class Game {
                 bomb.update();
                 if (bomb.state == 'exploded') {
                     this.bombs.splice(index, 1);
+                    this.player.bombCount--;
                 }
             });
 
+            this.lastKeys = {...keys};
+            // console.log(this.lastKeys);
+
             // console.log('x: '+this.player.pos.x+', y: '+this.player.pos.y);s
 
-            this.lastKeys = new Map([
-                ["left", keys.left],
-                ["up", keys.up],
-                ["right", keys.right],
-                ["down", keys.down]
-            ]);
+            // this.lastKeys = new Map([
+            //     ["left", keys.left],
+            //     ["up", keys.up],
+            //     ["right", keys.right],
+            //     ["down", keys.down]
+            // ]);
 
             switch (this.gameState) {
                 case this.gameStateEnum.MAINMENU:

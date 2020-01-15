@@ -5,7 +5,7 @@ class Bomb {
         this.range = range;
         this.state = "lol";
         this.player = player;
-        this.position = position;
+        this.pos = position;
     }
 
     countdown = () => {
