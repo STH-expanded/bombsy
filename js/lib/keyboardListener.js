@@ -8,7 +8,8 @@ class KeyboardListener {
             [68, "right"],
             [83, "down"],
             [79, "a"],
-            [80, "b"]
+            [80, "b"],
+            [13, "enter"]
         ]);
 
         this.handler = event => {
