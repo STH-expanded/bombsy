@@ -45,6 +45,8 @@ class Display {
         var brick = new Image();
         const blockSize = 16;
 
+        this.cx.translate(320, 0);
+
         for (var row = 0; row < map.length; row++) {
             for (var column = 0; column < map[0].length; column++) {
                 switch (map[column][row]) {
@@ -96,6 +98,7 @@ class Display {
             }
         }
 
+        this.cx.translate(-320, 0);
     }
 
     resize = () => {
@@ -144,10 +147,6 @@ class Display {
                 (270 * this.zoom) / 2 + 20 * index
             );
         });
-
-        // ground, wall, brick
-        this.generateLevel(new Level(firstLevel, "./assets/plant.jpeg", "./assets/wall.png", "./assets/brick.png"));
-
     }
 
     displayGameSettings = () => {
@@ -179,6 +178,9 @@ class Display {
             480 * this.zoom,
             270 * this.zoom
         );
+
+        // ground, wall, brick
+        this.generateLevel(new Level(firstLevel, "./assets/plant.jpeg", "./assets/wall.png", "./assets/brick.png"));
 
         var player1 = this.game.player;
         // var player2 = this.game.fight.player2.character;

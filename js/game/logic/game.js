@@ -22,7 +22,7 @@ class Game {
             ENDMENU: "endMenu"
         };
 
-        this.gameState = this.gameStateEnum.MAINMENU;
+        this.gameState = this.gameStateEnum.FIGHT;
         this.gamemode = null;
 
         this.updateMainMenu = () => {
