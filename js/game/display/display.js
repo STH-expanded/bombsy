@@ -1,4 +1,20 @@
 class Display {
+    constructor(game) {
+        this.frame = 0;
+        this.zoom = 1;
+
+        this.game = game;
+
+        this.canvas = document.createElement("canvas");
+        this.cx = this.canvas.getContext("2d");
+
+        this.update();
+
+        this.resize();
+        window.addEventListener("resize", this.resize);
+        document.body.appendChild(this.canvas);
+    }
+
     update = () => {
         switch (this.game.gameState) {
             case this.game.gameStateEnum.MAINMENU:
@@ -18,93 +34,61 @@ class Display {
         }
         this.frame++;
 
-        //background
-        /*
-        this.cx.fillStyle = "#FE3455";
-        this.cx.fillRect(
-            0 * this.zoom,
-            0 * this.zoom,
-            this.canvas.width * this.zoom,
-            this.canvas.height * this.zoom
-        );
-
-        //obstacles
-        this.cx.fillStyle = "#000";
-        this.game.obstacles.forEach(obstacle => {
-            this.cx.fillRect(
-                obstacle.pos.x * this.zoom,
-                obstacle.pos.y * this.zoom,
-                obstacle.size.x * this.zoom,
-                obstacle.size.y * this.zoom
-            );
-        });
-
-        */
-        //player
-        // var player = this.game.player;
-        // this.cx.fillStyle = "#FFFFFF";
-        // this.cx.fillRect(
-        //     player.pos.x * this.zoom,
-        //     player.pos.y * this.zoom,
-        //     player.size.x * this.zoom,
-        //     player.size.y * this.zoom
-        // );
-        /*
-
-        var player = this.game.player;
-        // var sprite = player.speed.x ? this.playerSprite2 : this.playerSprite;
-
-        var sprite = this.playerSprite;
-
-        // Player 1 image :
-        this.cx.drawImage(
-            sprite,
-            0,
-            0,
-            117,
-            83,
-            player.pos.x * this.zoom,
-            player.pos.y * this.zoom,
-            player.size.x * this.zoom,
-            player.size.y * this.zoom
-        );
-
-        console.log("player 1:");
-        console.log(this.game.player.pos);
-        console.log("player 2 :");
-        console.log(this.game.player2.pos);
-
-        //interface
-        this.cx.fillStyle = "#fff";
-        this.cx.font = 16 * this.zoom + "px consolas";
-        this.cx.fillText(
-            "x:" + player.pos.x + " y:" + player.pos.y,
-            8 * this.zoom,
-            16 * this.zoom
-        );
-
-        this.cx.fillText(
-            "x:" + player2.pos.x + " y:" + player2.pos.y,
-            392 * this.zoom,
-            16 * this.zoom
-        );
-
-        this.frame++; */
-
-        var classicLevel = new Level(firstLevel, "./plant.jpeg", "./stroke.png", "./brick.png");
+        const classicLevel = new Level(firstLevel, "./assets/plant.jpeg", "./assets/stroke.png", "./assets/brick.png");
+        var map = classicLevel.map;
         classicLevel.fillMap(this);
-        console.log(classicLevel.tiles.size);
-        console.log(classicLevel.tiles);
-        for (let z = 0; z < classicLevel.tiles.size; z++) {
-            var x = 0;
-            var y = 0;
-            let tile = classicLevel.tiles.get(x + ", " + y);
-            //console.log(tile);
-        };
-    }
+        let rows = map.length;
 
-    for (var row = 0; row < tilese; row++) {
-        for (var column = 0; column < this.map[0].length; column++) {
+        var img = new Image();   // Crée un nouvel élément img
+
+        for (var row = 0; row < map.length; row++) {
+            for (var column = 0; column < map[0].length; column++) {
+                switch (map[row][column]) {
+                    case 0:
+                        img.src = classicLevel.groundTile;
+                        this.cx.drawImage(
+                            img,
+                            0,
+                            0,
+                            16,
+                            16,
+                            row * 16 * this.zoom,
+                            column * 16 * this.zoom,
+                            16 * this.zoom,
+                            16 * this.zoom,
+                        )
+                        break;
+
+                    case 1:
+                        img.src = classicLevel.brickTile;
+                        this.cx.drawImage(
+                            img,
+                            0,
+                            0,
+                            16,
+                            16,
+                            row * 16 * this.zoom,
+                            column * 16 * this.zoom,
+                            16 * this.zoom,
+                            16 * this.zoom,
+                        )
+                        break;
+
+                    case 2:
+                        img.src = classicLevel.wallTile;
+                        this.cx.drawImage(
+                            img,
+                            0,
+                            0,
+                            16,
+                            16,
+                            row * 16 * this.zoom,
+                            column * 16 * this.zoom,
+                            16 * this.zoom,
+                            16 * this.zoom,
+                        )
+                        break;
+                }
             }
         }
     }
@@ -132,7 +116,7 @@ class Display {
             this.canvas.height = 270;
         }
         this.cx.imageSmoothingEnabled = false;
-    };
+    }
 
     displayMainMenu = () => {
         this.cx.fillStyle = "green";
@@ -156,7 +140,7 @@ class Display {
                 (270 * this.zoom) / 2 + 20 * index
             );
         });
-    };
+    }
 
     displayGameSettings = () => {
         this.cx.fillStyle = "orange";
@@ -176,8 +160,8 @@ class Display {
                 32 * this.zoom,
                 32 * this.zoom
             );
-        }
-    };
+        };
+    }
 
     displayFight = () => {
         this.cx.fillStyle = "red";
@@ -205,7 +189,7 @@ class Display {
         //     player2.size.x * this.zoom,
         //     player2.size.y * this.zoom
         // );
-    };
+    }
 
     displayEndMenu = () => {
         this.cx.fillStyle = "yellow";
@@ -231,21 +215,5 @@ class Display {
                 (270 * this.zoom) / 2 + 20 * index
             );
         });
-    }
-
-    constructor(game) {
-        this.frame = 0;
-        this.zoom = 1;
-
-        this.game = game;
-
-        this.canvas = document.createElement("canvas");
-        this.cx = this.canvas.getContext("2d");
-
-        this.update();
-
-        this.resize();
-        window.addEventListener("resize", this.resize);
-        document.body.appendChild(this.canvas);
     }
 }
