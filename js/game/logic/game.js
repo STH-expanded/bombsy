@@ -34,9 +34,6 @@ class Game {
 
         this.update = keys => {
             this.keys = keys;
-            // console.log(this.keys);
-
-            // console.log(this.bombs);
 
             this.player.update(this);
 
@@ -49,16 +46,6 @@ class Game {
             });
 
             this.lastKeys = {...keys};
-            // console.log(this.lastKeys);
-
-            // console.log('x: '+this.player.pos.x+', y: '+this.player.pos.y);s
-
-            // this.lastKeys = new Map([
-            //     ["left", keys.left],
-            //     ["up", keys.up],
-            //     ["right", keys.right],
-            //     ["down", keys.down]
-            // ]);
 
             switch (this.gameState) {
                 case this.gameStateEnum.MAINMENU:

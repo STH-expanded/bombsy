@@ -91,10 +91,6 @@ class Display {
         );
 
         this.frame++; */
-
-        var classicLevel = new Level(firstLevel, "./plant.jpeg", "./stroke.png", "./brick.png");
-        // console.log(classicLevel.tiles);
-        classicLevel.fillMap(this);
     };
 
     resize = () => {
@@ -168,6 +164,7 @@ class Display {
     };
 
     displayFight = () => {
+        // Level
         this.cx.fillStyle = "red";
         this.cx.fillRect(
             0 * this.zoom,
@@ -176,8 +173,8 @@ class Display {
             270 * this.zoom
         );
 
+        // Player
         var player1 = this.game.player;
-        // var player2 = this.game.fight.player2.character;
 
         this.cx.fillStyle = "blue";
         this.cx.fillRect(
@@ -186,23 +183,13 @@ class Display {
             player1.size.x * this.zoom,
             player1.size.y * this.zoom
         );
-        // this.cx.fillStyle = "green";
-        // this.cx.fillRect(
-        //     player2.pos.x * this.zoom,
-        //     player2.pos.y * this.zoom,
-        //     player2.size.x * this.zoom,
-        //     player2.size.y * this.zoom
-        // );
-
-        //Bombs 
+    
+        // Bombs 
         this.game.bombs.forEach(bomb => {
-            const posX = bomb.pos.x;
-            const posY = bomb.pos.y;
-
             this.cx.fillStyle = "black";
             this.cx.fillRect(
-                posX * this.zoom,
-                posY * this.zoom,
+                bomb.pos.x * this.zoom,
+                bomb.pos.y * this.zoom,
                 10 * this.zoom,
                 10 * this.zoom
             );

@@ -8,10 +8,11 @@ class Player {
         this.size = new Vector2D(10, 10);
         this.isAlive = true;
         this.bombCount = 0;
-        this.bombCapacity = 2;
+        this.bombCapacity = 1;
         this.range = 2;
         this.canPush = false;
 
+        // Horizontal Movement
         this.moveX = game => {
             // Directions
             if (game.keys.left && !game.keys.right) {
@@ -49,6 +50,7 @@ class Player {
             
         }
 
+        // Vertical Movement
         this.moveY = game => {
             // var floor = collision2D(
             //     this.pos.plus(new Vector2D(0, this.size.y)),
@@ -79,6 +81,7 @@ class Player {
             this.pos = newPos;
         }
 
+        // Drop Bomb
         this.dropBomb = game => {
             if (game.keys.space && !game.lastKeys.space && this.bombCount < this.bombCapacity) {
                 let bomb = new Bomb(1, this.name, this.pos);
@@ -89,6 +92,7 @@ class Player {
             }             
         }
 
+        // Push Bomb
         this.pushBomb = () => {
 
         }
