@@ -33,64 +33,69 @@ class Display {
                 break;
         }
         this.frame++;
+    }
 
-        const classicLevel = new Level(firstLevel, "./assets/plant.jpeg", "./assets/stroke.png", "./assets/brick.png");
-        var map = classicLevel.map;
-        classicLevel.fillMap(this);
+    generateLevel = (level) => {
+        var map = level.map;
+        level.fillMap(this);
         let rows = map.length;
 
-        var img = new Image();   // Crée un nouvel élément img
+        var wall = new Image();
+        var ground = new Image();
+        var brick = new Image();
+        const blockSize = 16;
 
         for (var row = 0; row < map.length; row++) {
             for (var column = 0; column < map[0].length; column++) {
-                switch (map[row][column]) {
+                switch (map[column][row]) {
                     case 0:
-                        img.src = classicLevel.groundTile;
+                        ground.src = level.groundTile;
                         this.cx.drawImage(
-                            img,
+                            ground,
                             0,
                             0,
-                            16,
-                            16,
-                            row * 16 * this.zoom,
-                            column * 16 * this.zoom,
-                            16 * this.zoom,
-                            16 * this.zoom,
+                            160, //TODO: Create a constant when sprites will be set with the same width (change the other case aswell)
+                            160, //TODO: Create a constant when sprites will be set with the same height (change the other case aswell)
+                            row * blockSize * this.zoom,
+                            column * blockSize * this.zoom,
+                            blockSize * this.zoom,
+                            blockSize * this.zoom,
                         )
                         break;
 
                     case 1:
-                        img.src = classicLevel.brickTile;
+                        wall.src = level.wallTile;
                         this.cx.drawImage(
-                            img,
+                            wall,
                             0,
                             0,
-                            16,
-                            16,
-                            row * 16 * this.zoom,
-                            column * 16 * this.zoom,
-                            16 * this.zoom,
-                            16 * this.zoom,
+                            200,
+                            200,
+                            row * blockSize * this.zoom,
+                            column * blockSize * this.zoom,
+                            blockSize * this.zoom,
+                            blockSize * this.zoom,
                         )
                         break;
 
                     case 2:
-                        img.src = classicLevel.wallTile;
+                        brick.src = level.brickTile;
                         this.cx.drawImage(
-                            img,
+                            brick,
                             0,
                             0,
-                            16,
-                            16,
-                            row * 16 * this.zoom,
-                            column * 16 * this.zoom,
-                            16 * this.zoom,
-                            16 * this.zoom,
+                            800,
+                            800,
+                            row * blockSize * this.zoom,
+                            column * blockSize * this.zoom,
+                            blockSize * this.zoom,
+                            blockSize * this.zoom,
                         )
                         break;
                 }
             }
         }
+
     }
 
     resize = () => {
@@ -126,7 +131,6 @@ class Display {
             480 * this.zoom,
             270 * this.zoom
         );
-
         this.game.menuOptionList.forEach((option, index) => {
             if (this.game.menuOptionList[this.game.mainMenuCursor] === option) {
                 this.cx.fillStyle = "red";
@@ -140,6 +144,10 @@ class Display {
                 (270 * this.zoom) / 2 + 20 * index
             );
         });
+
+        // ground, wall, brick
+        this.generateLevel(new Level(firstLevel, "./assets/plant.jpeg", "./assets/wall.png", "./assets/brick.png"));
+
     }
 
     displayGameSettings = () => {

@@ -1,8 +1,8 @@
 class Level {
-    constructor(map, wallTile, groundTile, brickTile) {
+    constructor(map, groundTile, wallTile, brickTile) {
         this.map = map;
-        this.wallTile = wallTile;
         this.groundTile = groundTile;
+        this.wallTile = wallTile;
         this.brickTile = brickTile;
         this.tiles = new Map();
     }
