@@ -1,16 +1,18 @@
 class Player {
 
     constructor(pos) {
+        this.name = "Polo";
         this.walkspeed = 5;
         this.speed = new Vector2D(1, 0);
         this.pos = pos;
         this.size = new Vector2D(10, 10);
         this.isAlive = true;
         this.bombCount = 0;
-        this.bombCapacity = 1;
-        this.range = 2;
+        this.bombCapacity = 3;
+        this.range = 10;
         this.canPush = false;
 
+        // Horizontal Movement
         this.moveX = game => {
             // Directions
             if (game.keys.left && !game.keys.right) {
@@ -48,6 +50,7 @@ class Player {
             
         }
 
+        // Vertical Movement
         this.moveY = game => {
             // var floor = collision2D(
             //     this.pos.plus(new Vector2D(0, this.size.y)),
@@ -57,7 +60,6 @@ class Player {
             // );
 
             // Directions
-
             if (game.keys.up && !game.keys.down) {
                 this.speed.y = -this.walkspeed;
             } else if (game.keys.down && !game.keys.up) {
@@ -79,10 +81,18 @@ class Player {
             this.pos = newPos;
         }
 
-        this.dropBomb = () => {
+        // Drop Bomb
+        this.dropBomb = game => {
+            if (game.keys.space && !game.lastKeys.space && this.bombCount < this.bombCapacity) {
+                let bomb = new Bomb(this.range, this.name, this.pos);
+                game.bombs.push(bomb);
 
+                // Increment Bomb Counter
+                this.bombCount++;
+            }             
         }
 
+        // Push Bomb
         this.pushBomb = () => {
 
         }
@@ -90,8 +100,9 @@ class Player {
         this.update = game => {
             this.moveX(game);
             this.moveY(game);
-            this.dropBomb();
+            this.dropBomb(game);
             this.pushBomb();
         }
+
     }
 }

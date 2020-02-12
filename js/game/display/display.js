@@ -171,6 +171,7 @@ class Display {
     }
 
     displayFight = () => {
+        // Level
         this.cx.fillStyle = "red";
         this.cx.fillRect(
             0 * this.zoom,
@@ -183,7 +184,6 @@ class Display {
         this.generateLevel(new Level(firstLevel, "./assets/plant.jpeg", "./assets/wall.png", "./assets/brick.png"));
 
         var player1 = this.game.player;
-        // var player2 = this.game.fight.player2.character;
 
         this.cx.fillStyle = "blue";
         this.cx.fillRect(
@@ -192,13 +192,51 @@ class Display {
             player1.size.x * this.zoom,
             player1.size.y * this.zoom
         );
-        // this.cx.fillStyle = "green";
-        // this.cx.fillRect(
-        //     player2.pos.x * this.zoom,
-        //     player2.pos.y * this.zoom,
-        //     player2.size.x * this.zoom,
-        //     player2.size.y * this.zoom
-        // );
+
+        // Bombs 
+        this.game.bombs.forEach(bomb => {
+            // Bomb Pending
+            if (bomb.state == "pending") {
+                this.cx.fillStyle = "black";
+                this.cx.fillRect(
+                    bomb.pos.x * this.zoom,
+                    bomb.pos.y * this.zoom,
+                    this.game.tileSize * this.zoom,
+                    this.game.tileSize * this.zoom
+                );
+            } else if (bomb.state == "exploding") {
+                // Bomb Exploding
+                this.cx.fillStyle = "yellow";
+                this.cx.fillRect(
+                    bomb.pos.x * this.zoom,
+                    bomb.pos.y * this.zoom,
+                    (this.game.tileSize * bomb.range) * this.zoom,
+                    player1.size.y * this.zoom
+                );
+
+                this.cx.fillRect(
+                    bomb.pos.x * this.zoom,
+                    bomb.pos.y * this.zoom,
+                    player1.size.x * this.zoom,
+                    (this.game.tileSize * bomb.range) * this.zoom
+                );
+
+                this.cx.fillRect(
+                    bomb.pos.x * this.zoom,
+                    bomb.pos.y * this.zoom,
+                    (-(this.game.tileSize * bomb.range) + player1.size.x) * this.zoom,
+                    player1.size.y * this.zoom
+                );
+
+                this.cx.fillRect(
+                    bomb.pos.x * this.zoom,
+                    bomb.pos.y * this.zoom,
+                    player1.size.x * this.zoom,
+                    (-(this.game.tileSize * bomb.range) + player1.size.y) * this.zoom
+                );
+            }
+
+        });
     }
 
     displayEndMenu = () => {
