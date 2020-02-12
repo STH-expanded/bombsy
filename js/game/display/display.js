@@ -1,10 +1,13 @@
 class Display {
     constructor(game) {
+
+        // Initialiaze Game Variables
         this.frame = 0;
         this.zoom = 1;
 
         this.game = game;
 
+        // Initialize canvas position
         this.canvas = document.createElement("canvas");
         this.cx = this.canvas.getContext("2d");
 
@@ -15,7 +18,9 @@ class Display {
         document.body.appendChild(this.canvas);
     }
 
+    // Update at each frame
     update = () => {
+        // Update frame depending on Game State
         switch (this.game.gameState) {
             case this.game.gameStateEnum.MAINMENU:
                 this.displayMainMenu();
@@ -35,17 +40,20 @@ class Display {
         this.frame++;
     }
 
+    // Initialize Game Level
     generateLevel = (level) => {
         var map = level.map;
         level.fillMap(this);
         let rows = map.length;
 
+        // Initialize Blocks 
         var wall = new Image();
         var ground = new Image();
         var brick = new Image();
         const blockSize = 16;
 
-        this.cx.translate(320, 0);
+        // 
+        this.cx.translate(100*this.zoom, 0);
 
         for (var row = 0; row < map.length; row++) {
             for (var column = 0; column < map[0].length; column++) {
@@ -98,7 +106,7 @@ class Display {
             }
         }
 
-        this.cx.translate(-320, 0);
+        this.cx.translate(-100*this.zoom, 0);
     }
 
     resize = () => {
