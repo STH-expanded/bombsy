@@ -11,6 +11,9 @@ class Opening extends Activity {
         this.endAnimEndFrame = 30;
 
         this.update = game => {
+            this.nextActivity = new Menu(game.mainMenuOptions, game.mainMenuOptionYCenter, game.mainMenuHandler);
+
+            console.log("test");
             if (this.initAnimFrame) this.initAnimFrame--;
             if (this.nextActivity) {
                 if (this.endAnimFrame >= this.endAnimEndFrame) game.activity = this.nextActivity;

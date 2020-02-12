@@ -113,7 +113,8 @@ class Game {
 
                 switch (this.gameState) {
                     case this.gameStateEnum.MAINMENU:
-                        this.updateMainMenu();
+                        this.nextActivity = new Menu(game.mainMenuOptions, game.mainMenuOptionYCenter, game.mainMenuHandler);
+                        // this.updateMainMenu();
                         break;
                     case this.gameStateEnum.GAMESETTINGS:
                         this.manageGameSettings();
