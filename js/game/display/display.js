@@ -64,8 +64,8 @@ class Display {
                             ground,
                             0,
                             0,
-                            160, //TODO: Create a constant when sprites will be set with the same width (change the other case aswell)
-                            160, //TODO: Create a constant when sprites will be set with the same height (change the other case aswell)
+                            blockSize, //TODO: Create a constant when sprites will be set with the same width (change the other case aswell)
+                            blockSize, //TODO: Create a constant when sprites will be set with the same height (change the other case aswell)
                             row * blockSize * this.zoom,
                             column * blockSize * this.zoom,
                             blockSize * this.zoom,
@@ -79,8 +79,8 @@ class Display {
                             wall,
                             0,
                             0,
-                            200,
-                            200,
+                            blockSize,
+                            blockSize,
                             row * blockSize * this.zoom,
                             column * blockSize * this.zoom,
                             blockSize * this.zoom,
@@ -94,8 +94,8 @@ class Display {
                             brick,
                             0,
                             0,
-                            800,
-                            800,
+                            blockSize,
+                            blockSize,
                             row * blockSize * this.zoom,
                             column * blockSize * this.zoom,
                             blockSize * this.zoom,
@@ -189,7 +189,7 @@ class Display {
         );
 
         // ground, wall, brick
-        this.generateLevel(new Level(firstLevel, "./assets/plant.jpeg", "./assets/wall.png", "./assets/brick.png"));
+        this.generateLevel(new Level(firstLevel, "./assets/plant.png", "./assets/wall.png", "./assets/brick.png"));
 
         var player1 = this.game.player;
 
