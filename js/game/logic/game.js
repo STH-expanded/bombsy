@@ -5,7 +5,8 @@ class Game {
 
         this.keys = null;
         this.lastKey = null;
-        this.player = new Player(new Vector2D(10, 10));
+        this.player1 = new Player(new Vector2D(10, 10), "Alex", 1);
+        this.player2 = new Player(new Vector2D(20, 20), "Adrien", 2);
 
         this.tileSize = 10;
 
@@ -37,13 +38,20 @@ class Game {
         this.update = keys => {
             this.keys = keys;
 
-            this.player.update(this);
+            this.player1.update(this);
+            this.player2.update(this);
 
             this.bombs.forEach((bomb, index) => {
                 bomb.update();
                 if (bomb.state == 'exploded') {
+                    console.log(bomb);
+                    if (bomb.player === 1) {
+                        this.player1.bombCount--;
+                    }
+                    if (bomb.player === 2) {
+                        this.player2.bombCount--;
+                    }
                     this.bombs.splice(index, 1);
-                    this.player.bombCount--;
                 }
             });
 

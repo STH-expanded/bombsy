@@ -1,7 +1,5 @@
 class Player {
-
-    constructor(pos) {
-        this.name = "Polo";
+    constructor(pos, name, id) {
         this.walkspeed = 5;
         this.speed = new Vector2D(1, 0);
         this.pos = pos;
@@ -11,13 +9,49 @@ class Player {
         this.bombCapacity = 3;
         this.range = 10;
         this.canPush = false;
+        this.id = id;
+
+        this.assignMovementKeys = (game, id) => {
+            var movementKeys = new Map();
+            if (id === 1) {
+                var left = game.keys.left;
+                var right = game.keys.right;
+                var up = game.keys.up;
+                var down = game.keys.down;
+            } else if (id === 2) {
+                var left = game.keys.left2;
+                var right = game.keys.right2;
+                var up = game.keys.up2;
+                var down = game.keys.down2;
+            }
+            movementKeys.set('left', left)
+                .set('right', right)
+                .set('up', up)
+                .set('down', down);
+
+            return movementKeys;
+        }
+
+        this.assignActionKeys = (game, id) => {
+            var actionKeys = new Map();
+            if (id === 1) {
+                var dropBomb = game.keys.bomb;
+            } else if (id === 2) {
+                var dropBomb = game.keys.bomb2;
+            }
+            actionKeys.set('dropBomb', dropBomb);
+
+            return actionKeys;
+        }
 
         // Horizontal Movement
         this.moveX = game => {
             // Directions
-            if (game.keys.left && !game.keys.right) {
+            var keys = this.assignMovementKeys(game, this.id);
+
+            if (keys.get('left') && !keys.get('down') && !keys.get('up') && !keys.get('right')) {
                 this.speed.x = -this.walkspeed;
-            } else if (game.keys.right && !game.keys.left) {
+            } else if (keys.get('right') && !keys.get('down') && !keys.get('left') && !keys.get('up')) {
                 this.speed.x = this.walkspeed;
             } else {
                 this.speed.x = 0;
@@ -44,10 +78,10 @@ class Player {
             //     game.floor.pos,
             //     this.size,
             //     game.floor.size
-            // )) {   
+            // )) {
             //     this.pos = this.pos.plus(xMovement);
             // }
-            
+
         }
 
         // Vertical Movement
@@ -55,24 +89,26 @@ class Player {
             // var floor = collision2D(
             //     this.pos.plus(new Vector2D(0, this.size.y)),
             //     game.floor.pos,
-            //     new Vector2D(1, 1), 
+            //     new Vector2D(1, 1),
             //     game.floor.size
             // );
 
             // Directions
-            if (game.keys.up && !game.keys.down) {
+            var keys = this.assignMovementKeys(game, this.id);
+
+            if (keys.get('up') && !keys.get('down') && !keys.get('left') && !keys.get('right')) {
                 this.speed.y = -this.walkspeed;
-            } else if (game.keys.down && !game.keys.up) {
+            } else if (keys.get('down') && !keys.get('up') && !keys.get('left') && !keys.get('right')) {
                 this.speed.y = this.walkspeed;
             } else {
                 this.speed.y = 0;
             }
-            
+
             let yMovement = new Vector2D(0, this.speed.y);
             let newPos = this.pos.plus(yMovement);
-    
+
             // let obstacle = collision2D(newPos, game.floor.pos, this.size, game.floor.size);
-    
+
             // if (obstacle) {
             //     this.speed.y = 0;
             // } else {
@@ -83,13 +119,25 @@ class Player {
 
         // Drop Bomb
         this.dropBomb = game => {
-            if (game.keys.space && !game.lastKeys.space && this.bombCount < this.bombCapacity) {
-                let bomb = new Bomb(this.range, this.name, this.pos);
-                game.bombs.push(bomb);
+            var keys = this.assignActionKeys(game, this.id);
 
-                // Increment Bomb Counter
-                this.bombCount++;
-            }             
+            if (this.id === 1) {
+                if (keys.get('dropBomb') && !game.lastKeys.bomb && this.bombCount < this.bombCapacity) {
+                    let bomb = new Bomb(this.range, this.id, this.pos);
+                    game.bombs.push(bomb);
+
+                    // Increment Bomb Counter
+                    this.bombCount++;
+                }
+            } else if (this.id === 2) {
+                if (keys.get('dropBomb') && !game.lastKeys.bomb2 && this.bombCount < this.bombCapacity) {
+                    let bomb = new Bomb(this.range, this.id, this.pos);
+                    game.bombs.push(bomb);
+
+                    // Increment Bomb Counter
+                    this.bombCount++;
+                }
+            }
         }
 
         // Push Bomb
@@ -103,6 +151,5 @@ class Player {
             this.dropBomb(game);
             this.pushBomb();
         }
-
     }
 }
