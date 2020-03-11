@@ -21,10 +21,12 @@ DisplayMenu.update = display => {
         );
     };
 
+
     menu.options.forEach((option, index) => {
+        console.log('salut');
         option += option === 'Player' && display.game.players.length < 2 ? 'Disabled' : '';
         drawMenuElement(display.assets['btn' + option], index);
-        if (display.game.activity.cursor === index) drawMenuElement(display.assets.menucursor, index);
+        if (display.game.activity.cursor === index) drawMenuElement(display.assets.menuCursor, index);
     });
 
     // Transitions

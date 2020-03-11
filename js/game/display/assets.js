@@ -2,11 +2,11 @@ class Assets {
     constructor() {
         // Opening
         this.openingImg = document.createElement('img');
-        this.openingImg.src = 'http://via.placeholder.com/50x50';
+        this.openingImg.src = 'img/opening.png';
 
         // Menu
         this.titleScreen = document.createElement('img');
-        this.titleScreen.src = 'http://via.placeholder.com/640x360';
+        this.titleScreen.src = 'img/bombsy.png';
 
         this.btnNewGame = document.createElement('img');
         this.btnNewGame.src = 'img/menu/btnNewGame.png';

@@ -6,6 +6,7 @@ class Display {
 
         this.game = game;
 
+        this.audioManager = new AudioManager();
         this.assets = new Assets();
 
         this.update = () => {

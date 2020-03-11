@@ -23,6 +23,8 @@ class Menu extends Activity {
             } else if (!this.initAnimFrame && !this.endAnimFrame) {
                 game.inputList.forEach((input, id) => {
                     game.lastInputList.forEach((lastinput, lastid) => {
+                    console.log(lastinput);
+
                         if (id === lastid) {
                             if (input.a && !lastinput.a) this.nextActivity = this.handler(game, this.options, this.cursor);
                             else {

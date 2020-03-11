@@ -102,6 +102,8 @@ class Game {
 
             this.player.update(this);
 
+            this.activity.update(this);
+
             if (!this.gamemode) {
 
                 this.lastKeys = new Map([
