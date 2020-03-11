@@ -3,8 +3,15 @@ class DisplayMenu extends ActivityDisplay {}
 DisplayMenu.update = display => {
     var menu = display.game.activity;
 
+    console.log(display.zoom);
+
     if (menu.optionYCenter === display.game.mainMenuOptionYCenter) {
-        display.cx.drawImage(display.assets.titleScreen, 0, 0, 480, 270, 0 * display.zoom, 0 * display.zoom, 480 * display.zoom, 270 * display.zoom);
+        display.cx.drawImage(
+            display.assets.titleScreen, 
+            0, 0, 480, 270, 
+            display.canvas.width / 2 - display.assets.titleScreen.width, 0 * display.zoom + 20, 
+            480 * display.zoom, 270 * display.zoom
+        );
     }
     else {
         display.cx.fillStyle = '#114';
@@ -21,9 +28,7 @@ DisplayMenu.update = display => {
         );
     };
 
-
     menu.options.forEach((option, index) => {
-        console.log('salut');
         option += option === 'Player' && display.game.players.length < 2 ? 'Disabled' : '';
         drawMenuElement(display.assets['btn' + option], index);
         if (display.game.activity.cursor === index) drawMenuElement(display.assets.menuCursor, index);

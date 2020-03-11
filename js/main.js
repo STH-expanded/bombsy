@@ -25,7 +25,8 @@ window.onload = () => {
         document.body.onclick = null;
         document.body.onkeypress = null;
 
-        var game = new Game();
+        var inputManager = new InputManager();
+        var game = new Game(inputManager.inputList);
         var display = new Display(game);
 
         var keyboardListener = new KeyboardListener();
@@ -33,8 +34,11 @@ window.onload = () => {
         window.game = game;
     
         var frame = () => {
-            game.update(keyboardListener.keys);
-            display.update();
+            inputManager.update();
+            game.update();
+            display.update();  
+            /*game.update(keyboardListener.keys);
+            display.update();*/
             requestAnimationFrame(frame);
         }
         requestAnimationFrame(frame);

@@ -1,5 +1,4 @@
 class Game {
-
     constructor(inputList) {
         this.frame = 0;
         this.keys = null;
@@ -11,7 +10,7 @@ class Game {
 
         this.players = [];
 
-        this.player = new Player(new Vector2D(10, 10));
+        // this.player = new Player(new Vector2D(10, 10));
 
         this.menuOptionList = ["Start game", "About"];
         this.endMenuOptionList = ["Play again", "Quit game"];
@@ -100,18 +99,18 @@ class Game {
         this.update = keys => {
             this.keys = keys;
 
-            this.player.update(this);
+            // this.player.update(this);
 
             this.activity.update(this);
 
             if (!this.gamemode) {
 
-                this.lastKeys = new Map([
+                /*this.lastKeys = new Map([
                     ["left", keys.left],
                     ["up", keys.up],
                     ["right", keys.right],
                     ["down", keys.down]
-                ]);
+                ]);*/
 
                 switch (this.gameState) {
                     case this.gameStateEnum.MAINMENU:
