@@ -66,9 +66,9 @@ class Display {
                         break;
 
                     case 1:
-                        wall.src = level.wallTile;
+                        brick.src = level.brickTile;
                         this.cx.drawImage(
-                            wall,
+                            brick,
                             0,
                             0,
                             blockSize,
@@ -81,9 +81,9 @@ class Display {
                         break;
 
                     case 2:
-                        brick.src = level.brickTile;
+                        wall.src = level.wallTile;
                         this.cx.drawImage(
-                            brick,
+                            wall,
                             0,
                             0,
                             blockSize,
