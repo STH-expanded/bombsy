@@ -2,7 +2,7 @@ class Player {
 
     constructor(id, name, pos) {
         // Player Attributes
-        this.id = id;
+        this.id = id
         this.isAlive = true;
         this.name = name;
         this.range = 10;
@@ -19,13 +19,47 @@ class Player {
         // Player Collision
         this.collisionBox = new CollisionBox(this.pos, this.size);
 
+        this.assignMovementKeys = (game, id) => {
+            var movementKeys = new Map();
+            if (id === 1) {
+                var left = game.keys.left;
+                var right = game.keys.right;
+                var up = game.keys.up;
+                var down = game.keys.down;
+            } else if (id === 2) {
+                var left = game.keys.left2;
+                var right = game.keys.right2;
+                var up = game.keys.up2;
+                var down = game.keys.down2;
+            }
+            movementKeys.set('left', left)
+                .set('right', right)
+                .set('up', up)
+                .set('down', down);
+
+            return movementKeys;
+        }
+
+        this.assignActionKeys = (game, id) => {
+            var actionKeys = new Map();
+            if (id === 1) {
+                var dropBomb = game.keys.bomb;
+            } else if (id === 2) {
+                var dropBomb = game.keys.bomb2;
+            }
+            actionKeys.set('dropBomb', dropBomb);
+
+            return actionKeys;
+        }
+
         // Horizontal Movement
         this.moveX = game => {
+            // Directions
+            var keys = this.assignMovementKeys(game, this.id);
 
-            // Key pressed
-            if (game.keys.left && !game.keys.right) {
+            if (keys.get('left') && !keys.get('down') && !keys.get('up') && !keys.get('right')) {
                 this.speed.x = -this.walkspeed;
-            } else if (game.keys.right && !game.keys.left) {
+            } else if (keys.get('right') && !keys.get('down') && !keys.get('left') && !keys.get('up')) {
                 this.speed.x = this.walkspeed;
                 
             } else {
@@ -42,15 +76,18 @@ class Player {
                 this.collisionBox = newCollisionBox;
                 this.pos = newPos;
             }
+
         }
 
         // Vertical Movement
         this.moveY = game => {
+          
+            // Directions
+            var keys = this.assignMovementKeys(game, this.id);
 
-            // Key pressed
-            if (game.keys.up && !game.keys.down) {
+            if (keys.get('up') && !keys.get('down') && !keys.get('left') && !keys.get('right')) {
                 this.speed.y = -this.walkspeed;
-            } else if (game.keys.down && !game.keys.up) {
+            } else if (keys.get('down') && !keys.get('up') && !keys.get('left') && !keys.get('right')) {
                 this.speed.y = this.walkspeed;
             } else {
                 this.speed.y = 0;
@@ -70,13 +107,25 @@ class Player {
 
         // Drop Bomb
         this.dropBomb = game => {
-            if (game.keys.space && !game.lastKeys.space && this.bombCount < this.bombCapacity) {
-                let bomb = new Bomb(this.range, this.name, this.pos);
-                game.bombs.push(bomb);
+            var keys = this.assignActionKeys(game, this.id);
 
-                // Increment Bomb Counter
-                this.bombCount++;
-            }             
+            if (this.id === 1) {
+                if (keys.get('dropBomb') && !game.lastKeys.bomb && this.bombCount < this.bombCapacity) {
+                    let bomb = new Bomb(this.range, this.id, this.pos);
+                    game.bombs.push(bomb);
+
+                    // Increment Bomb Counter
+                    this.bombCount++;
+                }
+            } else if (this.id === 2) {
+                if (keys.get('dropBomb') && !game.lastKeys.bomb2 && this.bombCount < this.bombCapacity) {
+                    let bomb = new Bomb(this.range, this.id, this.pos);
+                    game.bombs.push(bomb);
+
+                    // Increment Bomb Counter
+                    this.bombCount++;
+                }
+            }
         }
 
         // Push Bomb
@@ -90,6 +139,5 @@ class Player {
             this.dropBomb(game);
             this.pushBomb();
         }
-
     }
 }

@@ -78,9 +78,9 @@ class Display {
 
                     // Wall
                     case 1:
-                        wall.src = level.wallTile;
+                        brick.src = level.brickTile;
                         this.cx.drawImage(
-                            wall,
+                            brick,
                             0,
                             0,
                             blockSize,
@@ -94,9 +94,9 @@ class Display {
 
                     // Brick
                     case 2:
-                        brick.src = level.brickTile;
+                        wall.src = level.wallTile;
                         this.cx.drawImage(
-                            brick,
+                            wall,
                             0,
                             0,
                             blockSize,
@@ -201,7 +201,7 @@ class Display {
         // ground, wall, brick
         this.generateLevel(this.game.level);
 
-        var player1 = this.game.player;
+        var player1 = this.game.player1;
 
         this.cx.fillStyle = "blue";
         this.cx.fillRect(
@@ -211,7 +211,17 @@ class Display {
             player1.size.y * this.zoom
         );
 
-        // Bombs 
+        var player2 = this.game.player2;
+
+        this.cx.fillStyle = "green";
+        this.cx.fillRect(
+            player2.pos.x * this.zoom,
+            player2.pos.y * this.zoom,
+            player2.size.x * this.zoom,
+            player2.size.y * this.zoom
+        );
+
+        // Bombs
         this.game.bombs.forEach(bomb => {
             // Bomb Pending
             if (bomb.state == "pending") {
@@ -253,7 +263,6 @@ class Display {
                     (-(this.game.tileSize * bomb.range) + player1.size.y) * this.zoom
                 );
             }
-
         });
     }
 
