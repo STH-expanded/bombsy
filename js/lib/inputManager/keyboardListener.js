@@ -7,7 +7,15 @@ class KeyboardListener {
             "down": false,
             "a": false,
             "b": false,
-            "start": false
+            "start": false,
+            "bomb": false,
+            "up2": false,
+            "left2": false,
+            "rigth2": false,
+            "down2": false,
+            "action2": false,
+            "back2": false,
+            "bomb2": false,
         };
 
         this.keyCodes = {
@@ -17,7 +25,15 @@ class KeyboardListener {
             s: "down",
             o: "a",
             p: "b",
-            Enter: "start"
+            Space: "bomb",
+            Enter: "start",
+            u: "up2",
+            h: "left2",
+            k: "rigth2",
+            j: "down2",
+            y: "action2",
+            i: "back2",
+            m: "bomb2"
         };
 
         this.handler = event => {
