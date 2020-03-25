@@ -29,7 +29,7 @@ window.onload = () => {
         var game = new Game(inputManager.inputList);
         var display = new Display(game);
 
-        var keyboardListener = new KeyboardListener();
+        // var keyboardListener = new KeyboardListener();
 
         window.game = game;
     

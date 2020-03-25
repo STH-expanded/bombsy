@@ -3,13 +3,11 @@ class DisplayMenu extends ActivityDisplay {}
 DisplayMenu.update = display => {
     var menu = display.game.activity;
 
-    console.log(display.zoom);
-
     if (menu.optionYCenter === display.game.mainMenuOptionYCenter) {
         display.cx.drawImage(
             display.assets.titleScreen, 
             0, 0, 480, 270, 
-            display.canvas.width / 2 - display.assets.titleScreen.width, 0 * display.zoom + 20, 
+            0 * display.zoom, 0 * display.zoom + 20, 
             480 * display.zoom, 270 * display.zoom
         );
     }
@@ -22,7 +20,7 @@ DisplayMenu.update = display => {
     var drawMenuElement = (asset, index) => {
         display.cx.drawImage(
             asset,
-            0, 0, 128, 32,
+            0, 0, 10, 10,
             176 * display.zoom, ((display.canvas.height - display.canvas.height / menu.optionYCenter) / display.zoom - menu.options.length / 2 * 32 + 32 * index) * display.zoom,
             128 * display.zoom, 32 * display.zoom
         );
@@ -31,10 +29,14 @@ DisplayMenu.update = display => {
     menu.options.forEach((option, index) => {
         option += option === 'Player' && display.game.players.length < 2 ? 'Disabled' : '';
         drawMenuElement(display.assets['btn' + option], index);
-        if (display.game.activity.cursor === index) drawMenuElement(display.assets.menuCursor, index);
+        if (display.game.activity.cursor === index) {
+            // console.log(display.game.activity)
+            // console.log('passed');
+            drawMenuElement(display.assets.menuCursor, index);
+        }
     });
 
     // Transitions
-    if (menu.initAnimFrame) display.fadeEffect('#000', menu.initAnimFrame, menu.initAnimInitFrame);
-    if (menu.endAnimFrame) display.fadeEffect('#000', menu.endAnimFrame, menu.endAnimEndFrame);
+    //if (menu.initAnimFrame) display.fadeEffect('#000', menu.initAnimFrame, menu.initAnimInitFrame);
+    //if (menu.endAnimFrame) display.fadeEffect('#000', menu.endAnimFrame, menu.endAnimEndFrame);
 }

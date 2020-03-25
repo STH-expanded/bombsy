@@ -38,6 +38,7 @@ class Game {
         this.mainMenuOptionYCenter = 0.5;
         this.mainMenuHandler = (game, options, cursor) => {
             var nextActivity = null;
+            console.log(options[cursor]);
             if (!(options[cursor] === 'Game' && game.players.length < 2)) {
                 nextActivity = new GameSettings(
                     options[cursor],
@@ -59,79 +60,28 @@ class Game {
             switch (options[cursor]) {
                 case 'Rematch':
                     console.log('rematch');
-                    // nextActivity = new Fight(game.lastFight.players, game.lastFight.stage, true);
                     break;
                 case 'CharacterSelection':
                     console.log('rematch');
-                    // nextActivity = new CharacterSelection(options[cursor], game.characters, game.lastFight.players);
                     break;
                 case 'MainMenu':
-                    console.log('Main menu');
-                    // nextActivity = new Menu(game.mainMenuOptions, game.mainMenuOptionYCenter, game.mainMenuHandler);
+                    nextActivity = new Menu(game.mainMenuOptions, game.mainMenuOptionYCenter, game.mainMenuHandler);
                     break;
             }
             return nextActivity;
         };
 
-        this.updateMainMenu = () => {
-            var nbMenu = this.menuOptionList.length;
-            if (game.keys.up && !game.keys.down) {
-                console.log('up');
-
-                //this.gameState = this.gameStateEnum.GAMESETTINGS;
+        this.update = () => {
+            if (this.inputList.size !== this.players.size) {
+                this.inputList.forEach((input, id) => {
+                    if (!this.players.find(player => player.id === id)) this.players.push(new Player(id));
+                });
             }
-            if (game.keys.down && !game.keys.up) {
-                console.log('down');
-                //this.gameState = this.gameStateEnum.ABOUT;
-            }
-            if (game.keys.enter && !game.keys.up && !game.keys.up) {
-                console.log('enter');
-                //this.gameState = this.gameStateEnum.ABOUT;
-            }
-        };
-
-        this.updateEndMenu = () => {};
-
-        this.manageGameSettings = () => {};
-
-        this.manageFight = () => {};
-
-        this.update = keys => {
-            this.keys = keys;
-
-            // this.player.update(this);
 
             this.activity.update(this);
 
-            if (!this.gamemode) {
-
-                /*this.lastKeys = new Map([
-                    ["left", keys.left],
-                    ["up", keys.up],
-                    ["right", keys.right],
-                    ["down", keys.down]
-                ]);*/
-
-                switch (this.gameState) {
-                    case this.gameStateEnum.MAINMENU:
-                        this.nextActivity = new Menu(game.mainMenuOptions, game.mainMenuOptionYCenter, game.mainMenuHandler);
-                        // this.updateMainMenu();
-                        break;
-                    case this.gameStateEnum.GAMESETTINGS:
-                        this.manageGameSettings();
-                        break;
-                    case this.gameStateEnum.FIGHT:
-                        this.manageFight();
-                        break;
-                    case this.gameStateEnum.ENDMENU:
-                        this.updateEndMenu();
-                        break;
-                    default:
-                        break;
-                }
-
-                this.frame++;
-            };
-        }
+            this.inputList.forEach((input, id) => this.lastInputList.set(id, { ...input }));
+            this.frame++;
+        };
     }
 }
