@@ -38,16 +38,15 @@ class Game {
         this.mainMenuOptionYCenter = 0.5;
         this.mainMenuHandler = (game, options, cursor) => {
             var nextActivity = null;
-            console.log(options[cursor]);
-            if (!(options[cursor] === 'Game' && game.players.length < 2)) {
-                nextActivity = new GameSettings(
-                    options[cursor],
-                    game.characters,
-                    [
-                        game.players[0],
-                        options[cursor] === 'Game' ? game.players[1] : new Player('computer')
-                    ]
-                );
+            switch (options[cursor]) {
+                case 'Game':
+                    // nextActivity = ;
+                    console.log('Game');
+                    break;
+                case 'About':
+                    // nextActivity = ;
+                    console.log('About');
+                    break;
             }
             return nextActivity;
         };
