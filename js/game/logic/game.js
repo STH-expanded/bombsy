@@ -1,20 +1,28 @@
 class Game {
 
     constructor() {
+        // Initial Frame
         this.frame = 0;
 
+        // Keys Initialization
         this.keys = null;
         this.lastKey = null;
+
         this.player1 = new Player(new Vector2D(10, 10), "Alex", 1);
         this.player2 = new Player(new Vector2D(20, 20), "Adrien", 2);
 
-        this.tileSize = 10;
+        // Initialize Player and Level
+        this.player = new Player(1, "Bobby", new Vector2D(121, 17));
+        this.level;
 
+        // Bombs Array
         this.bombs = [];
 
+        // Menu Texts
         this.menuOptionList = ["Start game", "About"];
         this.endMenuOptionList = ["Play again", "Quit game"];
 
+        // Menu Options
         this.gameStateEnum = {
             MAINMENU: "mainMenu",
             GAMESETTINGS: "gameSettings",
@@ -22,9 +30,19 @@ class Game {
             ENDMENU: "endMenu"
         };
 
+        // specify GAMESTATE
         this.gameState = this.gameStateEnum.FIGHT;
         this.gamemode = null;
 
+        // Constructor of GAMESTATE
+        switch (this.gameState) {
+
+            // Create Level
+            case this.gameStateEnum.FIGHT:
+                this.level = new Level(firstLevel, "./assets/plant.png", "./assets/wall.png", "./assets/brick.png");
+        }
+
+        // Updates
         this.updateMainMenu = () => {
             var nbMenu = this.menuOptionList.length;
         };
@@ -33,9 +51,8 @@ class Game {
 
         this.manageGameSettings = () => {};
 
-        this.manageFight = () => {};
+        this.manageFight = (keys) => {
 
-        this.update = keys => {
             this.keys = keys;
 
             this.player1.update(this);
@@ -56,7 +73,9 @@ class Game {
             });
 
             this.lastKeys = {...keys};
+        };
 
+        this.update = keys => {
             switch (this.gameState) {
                 case this.gameStateEnum.MAINMENU:
                     this.updateMainMenu();
@@ -65,7 +84,7 @@ class Game {
                     this.manageGameSettings();
                     break;
                 case this.gameStateEnum.FIGHT:
-                    this.manageFight();
+                    this.manageFight(keys);
                     break;
                 case this.gameStateEnum.ENDMENU:
                     this.updateEndMenu();
