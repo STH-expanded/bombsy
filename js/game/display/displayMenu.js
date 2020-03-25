@@ -6,9 +6,9 @@ DisplayMenu.update = display => {
     if (menu.optionYCenter === display.game.mainMenuOptionYCenter) {
         display.cx.drawImage(
             display.assets.titleScreen, 
-            0, 0, 480, 270, 
-            0 * display.zoom, 0 * display.zoom + 20, 
-            480 * display.zoom, 270 * display.zoom
+            0, 0, 400, 150, 
+            0 * display.zoom, 0 * display.zoom, 
+            134 * display.zoom, 50 * display.zoom
         );
     }
     else {
@@ -17,22 +17,20 @@ DisplayMenu.update = display => {
     }
 
     // Options
-    var drawMenuElement = (asset, index) => {
+    var drawMenuElement = (asset, index, offset) => {
         display.cx.drawImage(
             asset,
-            0, 0, 10, 10,
-            176 * display.zoom, ((display.canvas.height - display.canvas.height / menu.optionYCenter) / display.zoom - menu.options.length / 2 * 32 + 32 * index) * display.zoom,
-            128 * display.zoom, 32 * display.zoom
+            0, 0, 400, 150, 
+            // 176 * display.zoom + offset, ((display.canvas.height - display.canvas.height / menu.optionYCenter) / display.zoom - menu.options.length / 2 * 75 + 75 * index) * display.zoom,
+            176 * display.zoom + offset, 75 * index * display.zoom, 
+            134 * display.zoom, 50 * display.zoom
         );
     };
 
     menu.options.forEach((option, index) => {
-        option += option === 'Player' && display.game.players.length < 2 ? 'Disabled' : '';
-        drawMenuElement(display.assets['btn' + option], index);
+        drawMenuElement(display.assets['btn' + option], index, 0);
         if (display.game.activity.cursor === index) {
-            // console.log(display.game.activity)
-            // console.log('passed');
-            drawMenuElement(display.assets.menuCursor, index);
+            drawMenuElement(display.assets.menuCursor, index, 0);
         }
     });
 
