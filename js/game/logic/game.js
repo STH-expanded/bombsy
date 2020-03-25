@@ -1,8 +1,10 @@
 class Game {
 
     constructor() {
+        // Initial Frame
         this.frame = 0;
 
+        // Keys Initialization
         this.keys = null;
         this.lastKey = null;
 
@@ -10,13 +12,14 @@ class Game {
         this.player = new Player(1, "Bobby", new Vector2D(121, 17));
         this.level;
 
-        this.tileSize = 10;
-
+        // Bombs Array
         this.bombs = [];
 
+        // Menu Texts
         this.menuOptionList = ["Start game", "About"];
         this.endMenuOptionList = ["Play again", "Quit game"];
 
+        // Menu Options
         this.gameStateEnum = {
             MAINMENU: "mainMenu",
             GAMESETTINGS: "gameSettings",
@@ -24,10 +27,11 @@ class Game {
             ENDMENU: "endMenu"
         };
 
+        // specify GAMESTATE
         this.gameState = this.gameStateEnum.FIGHT;
         this.gamemode = null;
 
-        
+        // Constructor of GAMESTATE
         switch (this.gameState) {
 
             // Create Level
@@ -35,6 +39,7 @@ class Game {
                 this.level = new Level(firstLevel, "./assets/plant.png", "./assets/wall.png", "./assets/brick.png");
         }
 
+        // Updates
         this.updateMainMenu = () => {
             var nbMenu = this.menuOptionList.length;
         };

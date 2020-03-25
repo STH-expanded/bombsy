@@ -65,7 +65,6 @@ class Player {
             if (newCollisionBox.intersectingCollisionBoxes(game.level.solidTiles).length == 0) {
                 this.collisionBox = newCollisionBox;
                 this.pos = newPos;
-                
             }
         }
 

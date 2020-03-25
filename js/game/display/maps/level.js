@@ -34,7 +34,7 @@ class Level {
         for (var row = 0; row < this.map.length; row++) {
             for (var column = 0; column < this.map[0].length; column++) {
                 var key = this.map[row][column];
-                var position = new Vector2D(row * this.tileSize, column * this.tileSize);
+                var position = new Vector2D(104 + row * this.tileSize, column * this.tileSize);
                 let tile;
                 switch (key) {
                     case 0:
