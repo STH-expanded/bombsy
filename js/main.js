@@ -29,16 +29,12 @@ window.onload = () => {
         var game = new Game(inputManager.inputList);
         var display = new Display(game);
 
-        // var keyboardListener = new KeyboardListener();
-
         window.game = game;
     
         var frame = () => {
             inputManager.update();
             game.update();
             display.update();  
-            /*game.update(keyboardListener.keys);
-            display.update();*/
             requestAnimationFrame(frame);
         }
         requestAnimationFrame(frame);
