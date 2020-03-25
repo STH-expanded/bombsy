@@ -7,7 +7,7 @@ DisplayMenu.update = display => {
         display.cx.drawImage(
             display.assets.titleScreen, 
             0, 0, 400, 150, 
-            0 * display.zoom, 0 * display.zoom, 
+            (display.canvas.width / 2) - (134 * display.zoom / 2), 0 * display.zoom, 
             134 * display.zoom, 50 * display.zoom
         );
     }
@@ -20,9 +20,8 @@ DisplayMenu.update = display => {
     var drawMenuElement = (asset, index, offset) => {
         display.cx.drawImage(
             asset,
-            0, 0, 400, 150, 
-            // 176 * display.zoom + offset, ((display.canvas.height - display.canvas.height / menu.optionYCenter) / display.zoom - menu.options.length / 2 * 75 + 75 * index) * display.zoom,
-            176 * display.zoom + offset, 75 * index * display.zoom, 
+            0, 0, 400, 150,
+            176 * display.zoom + offset, 75 * index * display.zoom + 75 * display.zoom, 
             134 * display.zoom, 50 * display.zoom
         );
     };
