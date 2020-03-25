@@ -8,11 +8,11 @@ class Game {
         this.keys = null;
         this.lastKey = null;
 
-        this.player1 = new Player(new Vector2D(10, 10), "Alex", 1);
-        this.player2 = new Player(new Vector2D(20, 20), "Adrien", 2);
 
-        // Initialize Player and Level
-        this.player = new Player(1, "Bobby", new Vector2D(121, 17));
+        this.player1 = new Player(1, "Joueur 1", new Vector2D(121, 17));
+        this.player2 = new Player(2, "Joueur 2", new Vector2D(345, 17));
+
+        // Initialize Level
         this.level;
 
         // Bombs Array

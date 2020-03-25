@@ -57,9 +57,9 @@ class Player {
             // Directions
             var keys = this.assignMovementKeys(game, this.id);
 
-            if (keys.get('left') && !keys.get('down') && !keys.get('up') && !keys.get('right')) {
+            if (keys.get('left') && !keys.get('right')) {
                 this.speed.x = -this.walkspeed;
-            } else if (keys.get('right') && !keys.get('down') && !keys.get('left') && !keys.get('up')) {
+            } else if (keys.get('right') && !keys.get('left')) {
                 this.speed.x = this.walkspeed;
                 
             } else {
@@ -85,9 +85,9 @@ class Player {
             // Directions
             var keys = this.assignMovementKeys(game, this.id);
 
-            if (keys.get('up') && !keys.get('down') && !keys.get('left') && !keys.get('right')) {
+            if (keys.get('up') && !keys.get('down')) {
                 this.speed.y = -this.walkspeed;
-            } else if (keys.get('down') && !keys.get('up') && !keys.get('left') && !keys.get('right')) {
+            } else if (keys.get('down') && !keys.get('up')) {
                 this.speed.y = this.walkspeed;
             } else {
                 this.speed.y = 0;
