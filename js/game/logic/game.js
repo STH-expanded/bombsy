@@ -1,19 +1,28 @@
 class Game {
 
-    constructor(inputList) {
+    constructor() {
+        // Initial Frame
         this.frame = 0;
+
+        // Keys Initialization
         this.keys = null;
         this.lastKey = null;
-        this.player1 = new Player(new Vector2D(10, 10), "Alex", 1);
-        this.player2 = new Player(new Vector2D(20, 20), "Adrien", 2);
 
-        this.tileSize = 10;
 
+        this.player1 = new Player(1, "Joueur 1", new Vector2D(121, 17));
+        this.player2 = new Player(2, "Joueur 2", new Vector2D(345, 17));
+
+        // Initialize Level
+        this.level;
+
+        // Bombs Array
         this.bombs = [];
 
+        // Menu Texts
         this.menuOptionList = ["Start game", "About"];
         this.endMenuOptionList = ["Play again", "Quit game"];
 
+        // Menu Options
         this.gameStateEnum = {
             MAINMENU: "mainMenu",
             GAMESETTINGS: "gameSettings",
@@ -21,17 +30,19 @@ class Game {
             ENDMENU: "endMenu"
         };
 
-        this.gameMap = {
-            DEFAULT: 'default',
-            DESERT: 'desert',
-            JUNGLE: 'jungle'
-        }
-
-        this.gameState = this.gameStateEnum.MAINMENU;
-        window.gameState = this.gameState;
+        // specify GAMESTATE
         this.gameState = this.gameStateEnum.FIGHT;
         this.gamemode = null;
 
+        // Constructor of GAMESTATE
+        switch (this.gameState) {
+
+            // Create Level
+            case this.gameStateEnum.FIGHT:
+                this.level = new Level(firstLevel, "./assets/plant.png", "./assets/wall.png", "./assets/brick.png");
+        }
+
+        // Updates
         this.updateMainMenu = () => {
             /*console.log(this.keys);
             var nbMenu = this.menuOptionList.length;
@@ -47,9 +58,8 @@ class Game {
 
         this.manageGameSettings = () => {};
 
-        this.manageFight = () => {};
+        this.manageFight = (keys) => {
 
-        this.update = keys => {
             this.keys = keys;
 
             this.player1.update(this);
@@ -70,7 +80,9 @@ class Game {
             });
 
             this.lastKeys = {...keys};
+        };
 
+        this.update = keys => {
             switch (this.gameState) {
                 case this.gameStateEnum.MAINMENU:
                     this.updateMainMenu();
@@ -79,7 +91,7 @@ class Game {
                     this.manageGameSettings();
                     break;
                 case this.gameStateEnum.FIGHT:
-                    this.manageFight();
+                    this.manageFight(keys);
                     break;
                 case this.gameStateEnum.ENDMENU:
                     this.updateEndMenu();

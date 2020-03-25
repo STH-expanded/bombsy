@@ -1,10 +1,13 @@
 class Display {
     constructor(game) {
+
+        // Initialiaze Game Variables
         this.frame = 0;
         this.zoom = 1;
 
         this.game = game;
 
+        // Initialize canvas position
         this.canvas = document.createElement("canvas");
         this.cx = this.canvas.getContext("2d");
 
@@ -15,7 +18,9 @@ class Display {
         document.body.appendChild(this.canvas);
     }
 
+    // Update at each frame
     update = () => {
+        // Update frame depending on Game State
         switch (this.game.gameState) {
             case this.game.gameStateEnum.MAINMENU:
                 this.displayMainMenu();
@@ -35,21 +40,27 @@ class Display {
         this.frame++;
     }
 
+    // Initialize Game Level
     generateLevel = (level) => {
         var map = level.map;
-        level.fillMap(this);
-        let rows = map.length;
+        level.fillMap(this, this.game);
+        // let rows = map.length;
 
+        // Initialize Blocks 
         var wall = new Image();
         var ground = new Image();
         var brick = new Image();
         const blockSize = 16;
 
-        this.cx.translate(320, 0);
+        // Move map to right
+        this.cx.translate(104 * this.zoom, 0);
 
+        // Draw Blocks on Map
         for (var row = 0; row < map.length; row++) {
             for (var column = 0; column < map[0].length; column++) {
                 switch (map[column][row]) {
+
+                    // Ground
                     case 0:
                         ground.src = level.groundTile;
                         this.cx.drawImage(
@@ -65,6 +76,7 @@ class Display {
                         )
                         break;
 
+                    // Wall
                     case 1:
                         brick.src = level.brickTile;
                         this.cx.drawImage(
@@ -80,6 +92,7 @@ class Display {
                         )
                         break;
 
+                    // Brick
                     case 2:
                         wall.src = level.wallTile;
                         this.cx.drawImage(
@@ -98,9 +111,11 @@ class Display {
             }
         }
 
-        this.cx.translate(-320, 0);
+        // Move map to left to center map
+        this.cx.translate(-104 * this.zoom, 0);
     }
 
+    // Resize depending on breakpo
     resize = () => {
         if (innerWidth >= 1920 && innerHeight >= 1080) {
             this.zoom = 4;
@@ -126,6 +141,7 @@ class Display {
         this.cx.imageSmoothingEnabled = false;
     }
 
+    // Display Main Menu
     displayMainMenu = () => {
         this.cx.fillStyle = "green";
         this.cx.fillRect(
@@ -149,6 +165,7 @@ class Display {
         });
     }
 
+    // Display Game Settings
     displayGameSettings = () => {
         this.cx.fillStyle = "orange";
         this.cx.fillRect(
@@ -170,9 +187,10 @@ class Display {
         };
     }
 
+    // Display Fight
     displayFight = () => {
         // Level
-        this.cx.fillStyle = "red";
+        this.cx.fillStyle = "#448";
         this.cx.fillRect(
             0 * this.zoom,
             0 * this.zoom,
@@ -181,7 +199,7 @@ class Display {
         );
 
         // ground, wall, brick
-        this.generateLevel(new Level(firstLevel, "./assets/plant.png", "./assets/wall.png", "./assets/brick.png"));
+        this.generateLevel(this.game.level);
 
         var player1 = this.game.player1;
 
@@ -248,6 +266,7 @@ class Display {
         });
     }
 
+    // Displayb End Menu
     displayEndMenu = () => {
         this.cx.fillStyle = "yellow";
         this.cx.fillRect(
