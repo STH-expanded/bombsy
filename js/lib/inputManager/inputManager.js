@@ -20,11 +20,13 @@ class InputManager {
         }
 
         this.listenKeyboard = event => {
-            if (!this.inputList.has('keyboard')) {
-                console.log("Keyboard connected");
-                var keyboardListener = new KeyboardListener();
-                this.inputList.set('keyboard', keyboardListener.keys);
-            }
+            var keyboardListener = new KeyboardListener();
+            keyboardListener.keys.forEach((commands, key) => {
+                if (!commands.hasOwnProperty(`keyboard${key}`)) {
+                    console.log("Keyboard connected");
+                    this.inputList.set(`keyboard${key}`, keyboardListener.keys[key]);
+                }
+            }); 
         }
 
         this.listenHandler = event => {

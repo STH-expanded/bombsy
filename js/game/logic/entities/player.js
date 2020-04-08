@@ -1,13 +1,15 @@
 class Player {
 
-    constructor(id, name, pos) {
+    constructor(id, name, pos, inputs) {
         // Player Attributes
         this.id = id
         this.isAlive = true;
         this.name = name;
         this.range = 10;
         this.pos = pos;
+        this.inputs = inputs;
         this.size = new Vector2D(14, 14);
+        console.log(this.inputs);
 
         // Player Powers
         this.bombCapacity = 3;
@@ -19,43 +21,45 @@ class Player {
         // Player Collision
         this.collisionBox = new CollisionBox(this.pos, this.size);
 
-        this.assignMovementKeys = (game, id) => {
-            var movementKeys = new Map();
-            if (id === 1) {
-                var left = game.keys.left;
-                var right = game.keys.right;
-                var up = game.keys.up;
-                var down = game.keys.down;
-            } else if (id === 2) {
-                var left = game.keys.left2;
-                var right = game.keys.right2;
-                var up = game.keys.up2;
-                var down = game.keys.down2;
-            }
-            movementKeys.set('left', left)
-                .set('right', right)
-                .set('up', up)
-                .set('down', down);
+        // this.assignMovementKeys = (game, id) => {
+        //     var movementKeys = new Map();
+        //     console.log(game.inputList);
+            
+        //     /*if (id === 1) {
+        //         var left = game.keys.left;
+        //         var right = game.keys.right;
+        //         var up = game.keys.up;
+        //         var down = game.keys.down;
+        //     } else if (id === 2) {
+        //         var left = game.keys.left2;
+        //         var right = game.keys.right2;
+        //         var up = game.keys.up2;
+        //         var down = game.keys.down2;
+        //     }*/
+        //     movementKeys.set('left', left)
+        //         .set('right', right)
+        //         .set('up', up)
+        //         .set('down', down);
 
-            return movementKeys;
-        }
+        //     return movementKeys;
+        // }
 
-        this.assignActionKeys = (game, id) => {
-            var actionKeys = new Map();
-            if (id === 1) {
-                var dropBomb = game.keys.bomb;
-            } else if (id === 2) {
-                var dropBomb = game.keys.bomb2;
-            }
-            actionKeys.set('dropBomb', dropBomb);
+        // this.assignActionKeys = (game, id) => {
+        //     var actionKeys = new Map();
+        //     if (id === 1) {
+        //         var dropBomb = game.keys.bomb;
+        //     } else if (id === 2) {
+        //         var dropBomb = game.keys.bomb2;
+        //     }
+        //     actionKeys.set('dropBomb', dropBomb);
 
-            return actionKeys;
-        }
+        //     return actionKeys;
+        // }
 
         // Horizontal Movement
         this.moveX = game => {
             // Directions
-            var keys = this.assignMovementKeys(game, this.id);
+            var keys = this.inputs;
 
             if (keys.get('left') && !keys.get('right')) {
                 this.speed.x = -this.walkspeed;
@@ -83,7 +87,7 @@ class Player {
         this.moveY = game => {
           
             // Directions
-            var keys = this.assignMovementKeys(game, this.id);
+            var keys = this.inputs;
 
             if (keys.get('up') && !keys.get('down')) {
                 this.speed.y = -this.walkspeed;
@@ -134,6 +138,8 @@ class Player {
         }
 
         this.update = game => {
+            this.inputs = {...game.inputList.get(this.id)};
+            
             this.moveX(game);
             this.moveY(game);
             this.dropBomb(game);
