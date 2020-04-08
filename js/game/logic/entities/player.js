@@ -9,7 +9,6 @@ class Player {
         this.pos = pos;
         this.inputs = inputs;
         this.size = new Vector2D(14, 14);
-        console.log(this.inputs);
 
         // Player Powers
         this.bombCapacity = 3;

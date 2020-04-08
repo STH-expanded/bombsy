@@ -19,9 +19,8 @@ class Game {
                         new Player(1, "Joueur 1", new Vector2D(121, 17), this.inputList),
                         new Player(2, "Joueur 2", new Vector2D(345, 17), this.inputList)
                     ];
-                    console.log(this.inputList);
+                    // console.log(this.inputList);
 
-                    console.log(this.players[0]);
                     this.level = new Level(firstLevel, "./assets/plant.png", "./assets/wall.png", "./assets/brick.png");
                     nextActivity = new Fight(this, this.inputList, this.level, this.players);
                     break;

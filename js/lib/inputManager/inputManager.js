@@ -1,6 +1,7 @@
 class InputManager {
     constructor() {
         this.inputList = new Map();
+        this.keyboardListener = new KeyboardListener();
 
         this.update = () => {
             var gamepads = Array.from(navigator.getGamepads());
@@ -20,11 +21,10 @@ class InputManager {
         }
 
         this.listenKeyboard = event => {
-            var keyboardListener = new KeyboardListener();
-            keyboardListener.keys.forEach((commands, key) => {
-                if (!commands.hasOwnProperty(`keyboard${key}`)) {
+            this.keyboardListener.keys.forEach((commands, key) => {
+                if (!this.inputList.hasOwnProperty(`keyboard${key}`)) {
                     console.log("Keyboard connected");
-                    this.inputList.set(`keyboard${key}`, keyboardListener.keys[key]);
+                    this.inputList.set(`keyboard${key}`, this.keyboardListener.keys[key]);
                 }
             }); 
         }
