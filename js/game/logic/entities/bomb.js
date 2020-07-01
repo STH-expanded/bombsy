@@ -1,8 +1,8 @@
 class Bomb {
 
     constructor(range, player, position) {
-        this.countdown = 180; // 3 seconds delay
-        this.explodingTime = 60; // 3 seconds delay
+        this.countdown = 120; // 3 seconds delay
+        this.explodingTime = 45; // 1 seconds delay
         this.range = range;
         this.state = "pending";
         this.player = player;

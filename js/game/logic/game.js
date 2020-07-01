@@ -7,6 +7,7 @@ class Game {
         // Keys Initialization
         this.keys = null;
         this.lastKey = null;
+        this.tileSize = 16;
 
 
         this.player1 = new Player(1, "Joueur 1", new Vector2D(121, 17));
